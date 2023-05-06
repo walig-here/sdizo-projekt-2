@@ -14,7 +14,7 @@ void test(){
  * @brief Zbiór opcji dostępnych w głównym menu aplikacji.
  */
 enum mainMenuOptions{
-    EXIT
+    MENU_EXIT
 };
 
 
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]){
 
     // Ustalenie opcji w menu głównym
     Menu main_menu("MENU GLOWNE:");
-    main_menu.addOption(EXIT, "Zamknij program");
+    main_menu.addOption(MENU_EXIT, "Zamknij program");
 
     // Główna pętla aplikacji
     bool is_running = true;
@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]){
         switch (main_menu.getUserChoice()){
         
             // Wyjście z aplikacji
-            case EXIT: is_running = false; break;
+            case MENU_EXIT: is_running = false; break;
 
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;
