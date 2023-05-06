@@ -15,8 +15,7 @@ class Matrix{
     /**
      * @brief 
      * Konstruktor macierzy kwadratowej, wypełnionej zadaną wartością. W wypadku
-     * podania stopnia macierzy równego 0, stworzona zostanie macierz
-     * stopnia 1 wypełniona zadaną wartością.
+     * podania stopnia macierzy równego 0, stworzona zostanie macierz pusta 0x0.
      * 
      * @param degree stopień macierzy
      * @param fill wartość, jaką ma zostać wypełniona macierz

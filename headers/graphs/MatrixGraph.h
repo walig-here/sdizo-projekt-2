@@ -16,7 +16,9 @@ class MatrixGraph : public Graph{
 
     /**
      * @brief 
-     * Konstruktor. Tworzy graf na podstawie danych wczytanych z pliku.
+     * Konstruktor. Tworzy graf na podstawie danych wczytanych z pliku. W wypadku zadania
+     * ilości wierzchołków równej 0, zostanie stworzony graf pusty, który nie zawiera
+     * żadnych wierzchołów oraz krawędzi.
      * 
      * @param verticies_count liczba wierzchołków
      * @param edges_data wektor zawierający dane nt poszczególnych krawedzi
@@ -29,6 +31,13 @@ class MatrixGraph : public Graph{
      * Destruktor. Zwalnia pamięć po grafie.
      */
     public: ~MatrixGraph();
+
+
+    /**
+     * @brief 
+     * Zwraca informacje, czy graf jest pusty.
+     */
+    public: bool isNull() { return adjacency_matrix->getDegree() == 0; }
 
 
     /**

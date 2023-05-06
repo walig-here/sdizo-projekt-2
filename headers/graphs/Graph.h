@@ -19,6 +19,13 @@ class Graph{
 
     /**
      * @brief 
+     * Zwraca informacje, czy graf jest pusty.
+     */
+    public: virtual bool isNull() = 0;
+
+
+    /**
+     * @brief 
      * Wykonuje algorytm Kruskalla na grafie.
      */
     public: virtual void algorithmKruskal() = 0;

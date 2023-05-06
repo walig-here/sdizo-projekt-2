@@ -5,6 +5,11 @@
 using namespace std;
 
 
+// testowanie funkcji, które nie przeszły testu jednostkowego
+void test(){
+    
+}
+
 /**
  * @brief Zbiór opcji dostępnych w głównym menu aplikacji.
  */

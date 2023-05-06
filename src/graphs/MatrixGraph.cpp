@@ -12,7 +12,7 @@ MatrixGraph::MatrixGraph(unsigned verticies_count, vector<EdgeData> edges_data){
         control_element = adjacency_matrix->get(edge.begin, edge.end);
         if(control_element == nullptr) continue;
 
-        *adjacency_matrix->get(edge.end, edge.begin) = *control_element = edge.weigth;
+        *(adjacency_matrix->get(edge.end, edge.begin)) = *control_element = edge.weigth;
     }
 
 }

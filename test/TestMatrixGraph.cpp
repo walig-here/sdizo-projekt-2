@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "graphs/MatrixGraph.h"
 
-// Sprawdzenie tworzenia macierzy o rozmiarze 0
+// Sprawdzenie tworzenia grafu o 5 wierzchołkach
 TEST(CreateGraph, FiveVertex){
 
     int elements[] = {
@@ -21,9 +21,49 @@ TEST(CreateGraph, FiveVertex){
     MatrixGraph graph(vertitices, edges);
 
     // Sprawdzenie
+    ASSERT_EQ(graph.isNull(), false);
     for(int i = 0; i < vertitices; i++)
         for(int j = 0; j < vertitices; j++)
             ASSERT_EQ(*graph.getAdjentancyMatrix()->get(i,j), elements[i * vertitices + j]);
+
+}
+
+// Sprawdzenie towrzenia grafu z zadaniem krawędzi, która nie istnieje
+TEST(CreateGraph, EdgesDontExist){
+
+    int elements[] = {
+        NO_CONNECTION,  3,              11,
+        3,              NO_CONNECTION,  0,
+        11,             0,              NO_CONNECTION
+    };
+    vector<EdgeData> edges = {
+        EdgeData(0, 1, 3),
+        EdgeData(1, 2, 0),
+        EdgeData(2, 0, 11),
+
+        EdgeData(1, 5, 23),
+        EdgeData(6, 7, 2)
+    };
+    unsigned vertitices = 3;
+    MatrixGraph graph(vertitices, edges);
+
+    // Sprawdzenie
+    ASSERT_EQ(graph.isNull(), false);
+    for(int i = 0; i < vertitices; i++)
+        for(int j = 0; j < vertitices; j++)
+            ASSERT_EQ(*graph.getAdjentancyMatrix()->get(i,j), elements[i * vertitices + j]);
+}
+
+// Tworzenie grafu, którego ilość wierzchołków ustalono na 0 (graf pusty)
+TEST(CreateGraph, NullGraph){
+
+    vector<EdgeData> edges = {
+        EdgeData(0, 1, 3)
+    };
+    MatrixGraph graph(0, edges);
+
+    // Sprawdzenie
+    ASSERT_EQ(graph.isNull(), true);
 
 }
 

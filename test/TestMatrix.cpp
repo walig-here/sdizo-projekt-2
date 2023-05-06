@@ -6,8 +6,8 @@ TEST(CreateMatrix, ZeroDegree){
 
     Matrix matrix(0);
     
-    ASSERT_EQ(matrix.getDegree(), 1);
-    ASSERT_EQ(*matrix.get(0,0), 0);
+    ASSERT_EQ(matrix.getDegree(), 0);
+    ASSERT_EQ(matrix.get(0,0), nullptr);
 
 }
 

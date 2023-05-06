@@ -129,16 +129,3 @@ class DynamicArray{
     public: void swap(unsigned index_1, unsigned index_2);
 
 };
-
-enum ArrayActions{
-    EXIT,
-    EXAMINE_ARRAY,
-    PUSH_FRONT_ARRAY,
-    PUSH_BACK_ARRAY,
-    ADD_ARRAY,
-    POP_FRONT_ARRAY,
-    POP_BACK_ARRAY,
-    REMOVE_ARRAY,
-    FIND_ARRAY,
-    LOAD_DATA_ARRAY,
-};
