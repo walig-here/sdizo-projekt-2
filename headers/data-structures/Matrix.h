@@ -7,8 +7,8 @@
 class Matrix{
 
     /* POLA */
-    private: DynamicArray* elements;     // tablica przechowująca elementy macierzy
-    private: unsigned degree;           // stopień macierzy
+    private: DynamicArray<int>* elements;       // tablica przechowująca elementy macierzy
+    private: unsigned degree;                   // stopień macierzy
 
     /* METODY */
 

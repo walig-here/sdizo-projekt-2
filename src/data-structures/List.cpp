@@ -191,3 +191,11 @@ bool List::remove(unsigned wanted_index){
     return false;
 
 }
+
+unsigned List::size(){
+
+    unsigned length = 0;
+    for(; this->operator[](length) != nullptr; length++);
+    return length;
+
+}

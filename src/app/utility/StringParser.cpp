@@ -16,11 +16,11 @@ list<string> StringParser::parse(string to_parse){
 
 }
 
-list<int> StringParser::parseInt(string to_parse){
+vector<int> StringParser::parseInt(string to_parse){
 
     // Spośród wyrazów zawartych w ciągu znaków wybieram te, które są liczbami całkowitymi
     list<string> words = parse(to_parse);
-    list<int> integers; 
+    vector<int> integers; 
     if(words.size() == 0) return integers;
 
     

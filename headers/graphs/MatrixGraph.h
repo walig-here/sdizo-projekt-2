@@ -1,5 +1,6 @@
 #include "graphs/Graph.h"
 #include "data-structures/Matrix.h"
+#include "data-structures/AlgorithmResults.h"
 
 #define NO_CONNECTION -2147483648   // oznaczenie braku połączenia między wierzchołkami
 
@@ -10,7 +11,7 @@
 class MatrixGraph : public Graph{
 
     /* POLA */
-    private: Matrix* adjacency_matrix;   // macierz sąsiedztwa grafu, gdzie wartości elementów oznaczają wagę krawędzi a wartość NO_CONNECTION wskazuje na nieistnienie krawędzi
+    private: Matrix* matrix;   // macierz sąsiedztwa grafu, gdzie wartości elementów oznaczają wagę krawędzi a wartość NO_CONNECTION wskazuje na nieistnienie krawędzi
 
     /* METODY */
 
@@ -22,8 +23,9 @@ class MatrixGraph : public Graph{
      * 
      * @param verticies_count liczba wierzchołków
      * @param edges_data wektor zawierający dane nt poszczególnych krawedzi
+     * @param directed określa czy graf jest skierowany
      */
-    public: MatrixGraph(unsigned verticies_count, vector<EdgeData> edges_data);
+    public: MatrixGraph(unsigned verticies_count, vector<EdgeData> edges_data, bool directed);
 
 
     /**
@@ -35,16 +37,29 @@ class MatrixGraph : public Graph{
 
     /**
      * @brief 
+     * Wyświetla graf.
+     */
+    public: virtual void print();
+
+
+    /**
+     * @brief 
      * Zwraca informacje, czy graf jest pusty.
      */
-    public: bool isNull() { return adjacency_matrix->getDegree() == 0; }
+    public: bool isNull() { return matrix->getDegree() == 0; }
+
+    /**
+     * @brief
+     * Zwraca ilość wierzchołków w grafie.
+    */
+   public: virtual unsigned verticiesCount() { return matrix->getDegree(); }
 
 
     /**
      * @brief 
      * Pobranie macierzy sąsiedztwa grafu
      */
-    public: Matrix* getAdjentancyMatrix() { return adjacency_matrix; }
+    public: Matrix* getAdjentancyMatrix() { return matrix; }
 
 
     /**
@@ -58,7 +73,7 @@ class MatrixGraph : public Graph{
      * @brief 
      * Wykonuje algorytm Prima na grafie.
      */
-    public: virtual void alogrithmPrim() {};
+    public: virtual MSTResult alogrithmPrim(unsigned start);
 
 
     /**

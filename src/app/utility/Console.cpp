@@ -23,7 +23,7 @@ void Console::clearScreen(){
 void Console::waitForUserResponse(){
 
     fflush(stdin);
-    printf("Wcisnij dowolny klawisz, aby kontynuowac...");
+    printf("Wcisnij klawisz ENTER, aby kontynuowac...");
     getchar();
 
 }
@@ -45,7 +45,7 @@ string Console::getInput(string msg){
 
     string user_input;
     if(msg != "") cout << msg << "\n>";
-    cin >> user_input;
+    getline(std::cin, user_input);
 
     return user_input;
 

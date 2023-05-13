@@ -24,6 +24,8 @@ struct ListElement{
 
 };
 
+#define NULL_END -1     // oznacza, że krawędź nie ma zdefiniowanego początku
+
 /* Klasa list dwukierunkowych będąca listami sąsiadów */
 class List{
 
@@ -140,5 +142,11 @@ class List{
     // index - indeks elementu, który ma zostać usunięty
     //-----------------------------------------------------------------------
     public: bool remove(unsigned index);
+
+    /**
+     * @brief 
+     * Zwraca długość listy.
+     */
+    public: unsigned size();
 
 };

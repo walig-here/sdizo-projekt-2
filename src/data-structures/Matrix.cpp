@@ -11,7 +11,7 @@ Matrix::Matrix(unsigned degree, int fill){
     }
 
     // Wypełniamy macierz zerami w ilości degree^2
-    elements = new DynamicArray(this->degree*this->degree, fill);
+    elements = new::DynamicArray<int>(this->degree*this->degree, fill);
 
 }
 

@@ -1,14 +1,16 @@
 #include "graphs/Graph.h"
 #include "data-structures/List.h"
+#include "data-structures/AlgorithmResults.h"
 
 /**
  * @brief 
  * Reprezentuje graf zaimplementowany w formie listy sąsiadów.
  */
-class ListGraph{
+class ListGraph : public Graph{
 
     /* POLA */
-    private: List* adjentency_lists;      // zbiór list sąsiadów kolejnych wierzchołów
+    private: List* adjentency_lists;        // zbiór list sąsiadów kolejnych wierzchołów
+    private: unsigned verticies_count;      // liczba wierzchołków
 
     /* METODY */
 
@@ -20,8 +22,9 @@ class ListGraph{
      * 
      * @param verticies_count liczba wierzchołków
      * @param edges_data wektor zawierający dane nt poszczególnych krawedzi
+     * @param directed określa czy graf jest skierowany
      */
-    public: ListGraph(unsigned verticies_count, vector<EdgeData> edges_data);
+    public: ListGraph(unsigned verticies_count, vector<EdgeData> edges_data, bool directed);
 
 
     /**
@@ -40,6 +43,30 @@ class ListGraph{
 
     /**
      * @brief 
+     * Wyświetla graf.
+     */
+    public: virtual void print();
+
+
+    /**
+     * @brief 
+     * Pobiera listę sąsiadów wierzchołka o wskazanym indeksie. Jeżeli taki wierzchołek nie
+     * istnieje lub nie ma sąsiadów, to zostanie zwrócony nullptr.
+     * 
+     * @param vertex_index indeks wierzchołka
+     */
+    public: List* getAdjetencyList(unsigned vertex_index);
+
+
+    /**
+     * @brief
+     * Zwraca ilość wierzchołków w grafie.
+    */
+   public: virtual unsigned verticiesCount() { return verticies_count; }
+
+
+    /**
+     * @brief 
      * Wykonuje algorytm Kruskalla na grafie.
      */
     public: virtual void algorithmKruskal() {};
@@ -49,7 +76,10 @@ class ListGraph{
      * @brief 
      * Wykonuje algorytm Prima na grafie.
      */
-    public: virtual void alogrithmPrim() {};
+    public: virtual MSTResult alogrithmPrim(unsigned start) { 
+        DynamicArray<PrimVertex> array;
+        return MSTResult(array);
+    }
 
 
     /**

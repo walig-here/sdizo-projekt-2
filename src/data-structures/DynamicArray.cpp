@@ -1,51 +1,55 @@
 #include "data-structures/DynamicArray.h"
 #include "app/utility/FileReader.h"
+#include "data-structures/AlgorithmResults.h"
 
 #include <cstring>
 #include <iostream>
 
 using namespace std;
 
-DynamicArray::DynamicArray(){
+template class DynamicArray<int>;
+template class DynamicArray<PrimVertex>;
+
+template<typename T> DynamicArray<T>::DynamicArray(){
 
     array_address = nullptr;
     length = 0;
 
 }
 
-DynamicArray::DynamicArray(unsigned length, int fill){
+template<typename T> DynamicArray<T>::DynamicArray(unsigned length, T fill) {
 
     this->length = length;
-    array_address = new int[length];
+    array_address = new T[length];
     for(int i = 0; i < length; i++) array_address[i] = fill;
 
 }
 
-DynamicArray::DynamicArray(DynamicArray *array) : DynamicArray() {
+template<typename T> DynamicArray<T>::DynamicArray(DynamicArray *array) : DynamicArray() {
 
     if(array == nullptr || array->length == 0) return;
 
     length = array->length;
-    array_address = new int[length];
+    array_address = new T[length];
     for(int i = 0; i < array->length; i++)
         array_address[i] = array->array_address[i];
 
 }
 
-DynamicArray::DynamicArray(vector<int> elements) : DynamicArray() {
+template<typename T> DynamicArray<T>::DynamicArray(vector<T> elements) : DynamicArray() {
 
     // Wczytujemy dane 
     if(elements.size() == 0) return;
 
     length = elements.size();
-    array_address = new int[length];
+    array_address = new T[length];
 
     for(int i = 0; i < length; i++)
         array_address[i] = elements[i];
 
 }
 
-DynamicArray::~DynamicArray(){
+template<typename T> DynamicArray<T>::~DynamicArray(){
 
     // Zwolnienie obaszaru pamięci zajmowanego przez tablice
     if(array_address == nullptr) return;
@@ -54,20 +58,20 @@ DynamicArray::~DynamicArray(){
 
 }
 
-void DynamicArray::swap(unsigned index_1, unsigned index_2){
+template<typename T> void DynamicArray<T>::swap(unsigned index_1, unsigned index_2){
 
     // Sprawdzam poprawność zadanych indeksów
     if(index_1 >= length) return;  
     if(index_2 >= length) return;    
 
     // Zamieniam miejscami wskazane elementy
-    int temp = array_address[index_1];
+    T temp = array_address[index_1];
     array_address[index_1] = array_address[index_2];
     array_address[index_2] = temp;
 
 }
 
-void DynamicArray::add(int new_element, unsigned index){
+template<typename T> void DynamicArray<T>::add(T new_element, unsigned index){
 
     // Jeżeli indeks to 0, to dodajemy na początek
     if(index == 0) return push_front(new_element);
@@ -76,7 +80,7 @@ void DynamicArray::add(int new_element, unsigned index){
     if(index >= length) return push_back(new_element);
 
     // Relokacja tablicę i przesuwam wszystkie elementy na pozycjach większych niz index o 1 pozycję
-    int* new_address = new int[++length];
+    T* new_address = new T[++length];
     new_address[index] = new_element;
 
     for(int i = 0; i < length-1; i++)
@@ -88,10 +92,10 @@ void DynamicArray::add(int new_element, unsigned index){
 
 }
 
-void DynamicArray::push_front(int new_element){
+template<typename T> void DynamicArray<T>::push_front(T new_element){
 
     // Relokuję tablicę i przesuwam dotyczas istniejące elementy o jedną pozycję w prawo
-    int* new_address = new int[++length];
+    T* new_address = new T[++length];
     new_address[0] = new_element;
     for(int i = 1; i < length; i++)
         new_address[i] = array_address[i-1];
@@ -102,11 +106,11 @@ void DynamicArray::push_front(int new_element){
 
 }
 
-void DynamicArray::push_back(int new_element){
+template<typename T> void DynamicArray<T>::push_back(T new_element){
 
     // Relokuję tablicę i kopiuję dotychczas istniejące elementy
     // Na koniec tablicy dodaję nowy element
-    int* new_address = new int[++length];
+    T* new_address = new T[++length];
     for(int i = 0; i < length-1; i++)
         new_address[i] = array_address[i];
     new_address[length-1] = new_element;
@@ -117,7 +121,7 @@ void DynamicArray::push_back(int new_element){
 
 }
 
-void DynamicArray::remove(unsigned index){
+template<typename T> void DynamicArray<T>::remove(unsigned index){
 
     // Jeżeli indeks 0, to usuwamy z początku
     if(index == 0) return pop_front();
@@ -130,7 +134,7 @@ void DynamicArray::remove(unsigned index){
 
     // Relokuję tablicę i kopiuje dotychczas istniejące elementy poza tym usuniętym
     // Wszystkie elementy zajdujące się za usuniętym elementem są przesunięte o 1 pozycję w lewo
-    int* new_address = new int[--length];
+    T* new_address = new T[--length];
     for(int i = 0; i < length; i++)
         new_address[i] = array_address[ ( i >= index ? i+1 : i ) ]; 
     
@@ -143,14 +147,14 @@ void DynamicArray::remove(unsigned index){
 
 }
 
-void DynamicArray::pop_front(){
+template<typename T> void DynamicArray<T>::pop_front(){
 
     // Z pustej tablicy nie usuwam
     if(length == 0) return;
 
     // Relokuję tablicę i kopiuje wszystkie dotchczas istniejące elementy poza pierwszym
     // Każdy element jest przesunięty o 1 pozycję w lewo
-    int* new_address = new int[--length];
+    T* new_address = new T[--length];
     for(int i = 0; i < length; i++)
         new_address[i] = array_address[i+1];
     
@@ -163,7 +167,7 @@ void DynamicArray::pop_front(){
 
 }
 
-void DynamicArray::print(){
+template<> void DynamicArray<int>::print(){
 
     printf("Zawartosc tablicy:\n");
     if(length == 0) {
@@ -172,18 +176,18 @@ void DynamicArray::print(){
     }
 
     for(int i = 0; i < length; i++) 
-        printf("%d ", array_address[i]);
+        cout << array_address[i] << ", ";
     printf("\n");
 
 }
 
-void DynamicArray::pop_back(){
+template<typename T> void DynamicArray<T>::pop_back(){
 
     // Z pustej tablicy nie usuwam
     if(length == 0) return;
 
     // Relokuję tablicę i kopiuje wszystkie dotchczas istniejące elementy poza ostatnim
-    int* new_address = new int[--length];
+    T* new_address = new T[--length];
     for(int i = 0; i < length; i++)
         new_address[i] = array_address[i];
     
@@ -196,7 +200,7 @@ void DynamicArray::pop_back(){
 
 }
 
-int* DynamicArray::find(int value){
+template<> int* DynamicArray<int>::find(int value){
 
     for(int i = 0; i < length; i++)
         if(array_address[i] == value) return array_address+i;
@@ -204,10 +208,39 @@ int* DynamicArray::find(int value){
 
 }
 
-int* DynamicArray::operator[](unsigned index){
+template<typename T> T* DynamicArray<T>::operator[](unsigned index){
 
     if(this == nullptr) return nullptr;
     if(index >= length) return nullptr;
     return &(array_address[index]);
+
+}
+
+template<> int DynamicArray<PrimVertex>::min(){
+
+    // Z pustej tablicy nie da się wyznaczyć minimum
+    if(array_address == nullptr) return -1;
+
+    // Znajdujemy pierwszy nierozważony wierzchołek
+    // Jeżeli wszystkie wierzchołki są rozpatrzone, to zwrócony zostanie nullptr, tablica nie ma minimum
+    int index = 0;
+    int minimum_index = -1;
+    for(; index < getLength(); index++){
+        if(array_address[index].processed) continue;
+
+        minimum_index = index;
+        break;
+    }
+    if(minimum_index == -1) return minimum_index;
+
+    // Porównując go resztą nierozważonych wierzchołków wybieramy minimum
+    index++;
+    for(; index < getLength(); index++){
+        if(array_address[index].processed) continue;
+        if(array_address[minimum_index].weight <= array_address[index].weight) continue;
+
+        minimum_index = index;
+    }
+    return minimum_index;
 
 }

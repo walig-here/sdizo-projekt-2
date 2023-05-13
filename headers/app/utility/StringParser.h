@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -32,6 +33,6 @@ class StringParser{
     /// @return
     /// Tablicę wydzielonych liczb całkowitych zawartych w zadanym ciągu lub pustą listę w wypadku
     /// podania pustego ciągu znaków bądź ciągu niezawierającego żadnych liczb całkowitych.
-    public: static list<int> parseInt(string to_parse);
+    public: static vector<int> parseInt(string to_parse);
 
 };
