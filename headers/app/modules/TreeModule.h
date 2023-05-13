@@ -22,10 +22,13 @@ class TreeModule : virtual public Module{
 
     private: void printGraph();
 
+    private: void algorithmPrim();
+
 };
 
 enum TreeOptions{
     TREE_EXIT,
     TREE_LOAD,
-    TREE_PRINT
+    TREE_PRINT,
+    TREE_PRIM
 };

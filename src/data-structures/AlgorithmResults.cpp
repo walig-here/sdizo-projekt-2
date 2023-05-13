@@ -38,13 +38,13 @@ MSTResult::MSTResult(DynamicArray<PrimVertex>& prim_array){
 void MSTResult::print(){
 
     // Nagłówek
-    printf("%-12s\t\t%-s\n", "Edge", "Weight");
+    printf("\n%-12s\t\t%-s\n", "Edge", "Weight");
 
     // Wyświetlam listę krawędzi
     for(auto edge : edges)
         printf("(%4d, %4d)\t\t%d\n", edge.begin, edge.end, edge.weigth);
     
     // Wyświetlam MST
-    printf("MST = %d", mst);
+    printf("MST = %d\n", mst);
 
 }

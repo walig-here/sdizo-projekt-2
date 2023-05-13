@@ -76,10 +76,7 @@ class ListGraph : public Graph{
      * @brief 
      * Wykonuje algorytm Prima na grafie.
      */
-    public: virtual MSTResult alogrithmPrim(unsigned start) { 
-        DynamicArray<PrimVertex> array;
-        return MSTResult(array);
-    }
+    public: virtual MSTResult alogrithmPrim(unsigned start);
 
 
     /**

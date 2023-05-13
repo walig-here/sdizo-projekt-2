@@ -7,7 +7,7 @@ using namespace std;
 
 
 // testowanie funkcji, które nie przeszły testu jednostkowego
-#include "graphs/MatrixGraph.h"
+#include "graphs/ListGraph.h"
 void test(){
 
     // Inicjalizacja grafu
@@ -20,8 +20,8 @@ void test(){
         EdgeData(3,2,1)
     };
     unsigned verticies = 5;
-    unsigned start = 1;
-    MatrixGraph graph(verticies, edges, false);
+    unsigned start = 0;
+    ListGraph graph(verticies, edges, false);
 
     graph.print();
 
@@ -44,9 +44,6 @@ enum mainMenuOptions{
  * @brief Główna pętla aplikacji.
  */
 int main(int argc, char const *argv[]){
-
-    test();
-    return 0;
 
     // Ustalenie opcji w menu głównym
     Menu main_menu("MENU GLOWNE:");

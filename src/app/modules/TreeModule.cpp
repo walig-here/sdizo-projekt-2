@@ -11,6 +11,7 @@ TreeModule::TreeModule() : Module("WYZNACZANIE MINIMALNEGO DRZEWA ROZPINAJACEGO:
     menu->addOption(TREE_EXIT, "Powrot do menu glownego");
     menu->addOption(TREE_LOAD, "Wczytaj graf z pliku");
     menu->addOption(TREE_PRINT, "Wyswietl graf");
+    menu->addOption(TREE_PRIM, "Algorytm Prima");
 
 }
 
@@ -38,6 +39,9 @@ void TreeModule::loop(){
 
             // Wyśweitlenie grafu
             case TREE_PRINT: printGraph(); break;
+
+            // Algorytm Prima
+            case TREE_PRIM: algorithmPrim(); break;
 
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;
@@ -87,6 +91,34 @@ void TreeModule::printGraph(){
 
     // Wyświetlam graf
     graph->print();
+    Console::waitForUserResponse();
+
+    // Zwolnienie instancji grafu
+    delete graph;
+    graph = nullptr;
+
+}
+
+void TreeModule::algorithmPrim(){
+
+    // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac
+    if(!loaded_graph_data){
+        cout << "Brak danych! Wczytaj graf, przed wykonaniem na nim algorytmu." << endl;
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Wczytujemy graf
+    graph = chooseRepresentation();
+    if(graph == nullptr){
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Wyświetlam graf
+    MSTResult result = graph->alogrithmPrim(0);
+    if(result.isEmpty()) cout << "Graf jest pusty!" << endl;
+    else result.print();
     Console::waitForUserResponse();
 
     // Zwolnienie instancji grafu
