@@ -4,27 +4,24 @@
 using namespace std;
 
 // Moduł obsługujący algorytmy wyznaczania minimalnego drzewa spinającego
-class TreeModule : virtual public Module{
+class PathModule : virtual public Module{
 
     /* POLA */
 
     /* METODY */
 
     // Konstruktor
-    public: TreeModule();
+    public: PathModule();
 
     // Destruktor
-    public: virtual ~TreeModule();
+    public: virtual ~PathModule();
 
     public: virtual void loop();
 
-    private: void algorithmPrim();
-
 };
 
-enum TreeOptions{
-    TREE_EXIT,
-    TREE_LOAD,
-    TREE_PRINT,
-    TREE_PRIM
+enum PathOptions{
+    PATH_EXIT,
+    PATH_LOAD,
+    PATH_PRINT
 };

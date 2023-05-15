@@ -80,7 +80,7 @@ class MatrixGraph : public Graph{
      * @brief 
      * Wykonuje algorytm Dijkstry na grafie.
      */
-    public: virtual void algorithmDijkstra() {};
+    public: virtual PathfindingResult algorithmDijkstra(unsigned start);
 
 
     /**

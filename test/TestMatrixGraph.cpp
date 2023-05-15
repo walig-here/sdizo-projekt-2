@@ -121,6 +121,51 @@ TEST(Prim, EmptyGraph){
 
 }
 
+// Algorytm Dijkstry
+TEST(Dijkstra, FiveVertexGraph){
+
+    // Inicjalizacja grafu
+    vector<EdgeData> edges = {
+        EdgeData(0,1,15),
+        EdgeData(2,0,5),
+        EdgeData(1,2,2),
+        EdgeData(2,4,3),
+        EdgeData(4,2,1),
+        EdgeData(1,3,4),
+        EdgeData(3,1,25),
+        EdgeData(3,4,10),
+        EdgeData(4,3,2)
+    };
+    unsigned v = 5;
+    unsigned start = 3;
+    MatrixGraph graph(v, edges, true);
+
+    // Wykonanie algorytmu
+    PathfindingResult result = graph.algorithmDijkstra(start);
+
+    // Sprawdzenie
+    vector<VertexData> verticies(5);
+    verticies[0].weight = 16;           verticies[0].predecessor = 2;           verticies[0].processed = true;
+    verticies[1].weight = 25;           verticies[1].predecessor = 3;           verticies[1].processed = true;
+    verticies[2].weight = 11;           verticies[2].predecessor = 4;           verticies[2].processed = true;
+    verticies[3].weight = 0;            verticies[3].predecessor = NULL_VERTEX; verticies[3].processed = true;
+    verticies[4].weight = 10;           verticies[4].predecessor = 3;           verticies[4].processed = true;
+    DynamicArray<VertexData> dijkstra_array(verticies); 
+    PathfindingResult proper_result(dijkstra_array, start);
+
+    for(int i = 0; i < v; i++){
+
+        if(i == start) continue;
+        ASSERT_EQ(result.getPathTo(i).getDistance(), proper_result.getPathTo(i).getDistance());
+        ASSERT_EQ(result.getPathTo(i).getVerticies().size(), proper_result.getPathTo(i).getVerticies().size());
+
+        for(int j = 0; j < result.getPathTo(i).getVerticies().size(); j++)
+            ASSERT_EQ(result.getPathTo(i).getVerticies()[j], proper_result.getPathTo(i).getVerticies()[j]);
+
+    }
+
+}
+
 // Entry point modułu testującego klasę Arithmetic
 int main(int argc, char const *argv[])
 {

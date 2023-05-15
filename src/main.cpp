@@ -7,26 +7,28 @@ using namespace std;
 
 
 // testowanie funkcji, które nie przeszły testu jednostkowego
-#include "graphs/ListGraph.h"
+#include "graphs/MatrixGraph.h"
 void test(){
 
     // Inicjalizacja grafu
     vector<EdgeData> edges = {
-        EdgeData(0,1,10),
-        EdgeData(0,3,1),
+        EdgeData(0,1,15),
+        EdgeData(2,0,5),
+        EdgeData(1,2,2),
+        EdgeData(2,4,3),
+        EdgeData(4,2,1),
         EdgeData(1,3,4),
-        EdgeData(1,4,8),
-        EdgeData(4,3,13),
-        EdgeData(3,2,1)
+        EdgeData(3,1,25),
+        EdgeData(3,4,10),
+        EdgeData(4,3,2)
     };
-    unsigned verticies = 5;
-    unsigned start = 0;
-    ListGraph graph(verticies, edges, false);
-
-    graph.print();
+    unsigned v = 5;
+    unsigned start = 3;
+    MatrixGraph graph(v, edges, true);
 
     // Wykonanie algorytmu
-    MSTResult result = graph.alogrithmPrim(start);
+    PathfindingResult result = graph.algorithmDijkstra(start);
+
     result.print();
 
 }
@@ -36,7 +38,8 @@ void test(){
  */
 enum mainMenuOptions{
     MENU_EXIT,
-    MENU_TREE_MODULE
+    MENU_TREE_MODULE,
+    MENU_PATH_MODULE
 };
 
 
@@ -45,10 +48,14 @@ enum mainMenuOptions{
  */
 int main(int argc, char const *argv[]){
 
+    test();
+    return 0;
+
     // Ustalenie opcji w menu głównym
     Menu main_menu("MENU GLOWNE:");
     main_menu.addOption(MENU_EXIT, "Zamknij program");
     main_menu.addOption(MENU_TREE_MODULE, "Wyszukiwanie minimalnego drzewa rozpinajacego");
+    main_menu.addOption(MENU_PATH_MODULE, "Wyszukiwanie najkrotszej sciezki w grafie");
 
     // Główna pętla aplikacji
     bool is_running = true;
@@ -62,6 +69,9 @@ int main(int argc, char const *argv[]){
 
             // Wejście do modułu wyszukiwania MST
             case MENU_TREE_MODULE: Module::start(TREE_MODULE); break;
+
+            // Wejście do modułu wyszukiwania najkrótszej ścieżki
+            case MENU_PATH_MODULE: Module::start(PATH_MODULE); break;
 
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;

@@ -1,6 +1,7 @@
 #pragma once
 
 class MSTResult;
+class PathfindingResult;
 
 /**
  * @brief 
@@ -62,7 +63,7 @@ class Graph{
      * @brief 
      * Wykonuje algorytm Dijkstry na grafie.
      */
-    public: virtual void algorithmDijkstra() = 0;
+    public: virtual PathfindingResult algorithmDijkstra(unsigned start) = 0;
 
 
     /**

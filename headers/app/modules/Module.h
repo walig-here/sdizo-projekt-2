@@ -7,7 +7,8 @@ using namespace std;
 
 // Typy modułów
 enum ModuleTypes{
-    TREE_MODULE
+    TREE_MODULE,
+    PATH_MODULE
 };
 
 // Klasa służąca do obługi modułów aplikacji
@@ -19,6 +20,8 @@ class Module{
     protected: vector<EdgeData> edges;        // zbiór krawędzi wczytanego grafu
     protected: unsigned verticies_amount;     // liczba wierzchołków wczytanego grafu
     protected: bool loaded_graph_data;        // czy zostały wczytane jakiekolwiek dane niezbędne do stworzenia grafu
+    protected: unsigned begin;                // wierzchołek startowy
+    protected: unsigned end;                  // wierzchołek końcowy
 
     /* METODY */
 
@@ -35,6 +38,12 @@ class Module{
     private: virtual void loop() = 0;
 
     // Wybór reprezentacji grafu
-    protected: Graph* chooseRepresentation();
+    protected: Graph* chooseRepresentation(ModuleTypes module_type);
+
+    // Wczytanie grafu
+    protected: void loadGraph();
+
+    // Wyświetlenie grafu
+    protected: void printGraph(ModuleTypes module_type);
 
 };

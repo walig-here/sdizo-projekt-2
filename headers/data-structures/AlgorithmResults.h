@@ -16,9 +16,9 @@
 
 /**
  * @brief 
- * Element tablicy obrazującej stan wierzchołka wewnątrz algorytmu prima.
+ * Element tablicy obrazującej stan wierzchołka wewnątrz algorytmu Prima lub Dijkstry.
  */
-struct PrimVertex{
+struct VertexData{
 
     /* POLA */
     bool processed = false;             // stan rozważenia wierzchołka
@@ -26,6 +26,105 @@ struct PrimVertex{
     int weight = INFINITY;              // waga krawędzi łączącej wierzchołek z poprzenikiem
 
 };
+
+/**
+ * @brief 
+ * Ścieżka wyznaczona za pomocą algorytmu Dijkstry lub Bellmana-Forda
+ */
+class Path{
+
+    /* POLA */
+    private: std::vector<unsigned> path;    // ciąg wierzchołków tworzoących ścieżkę
+    private: int distance;                  // suma wag krawędzi składających się na ścieżkę
+
+    /* METODY */
+
+    /**
+     * @brief 
+     * Konstruktor. Tworzy strukturę przechowującą ścieżkę z algorytmu Dijkstry.
+     * 
+     * @param dijkstra_array tablica zawierająca stan wierzchołków na koniec algorytmu
+     * @param end wierzchołek końcowy
+     */
+    public: Path(DynamicArray<VertexData>& dijkstra_array, unsigned end);
+
+
+    /**
+     * @brief 
+     * Destruktor. Zwalnia pamięć po ścieżce z algorytmu Dijkstry.
+     */
+    public: ~Path() {};
+
+
+    /**
+     * @brief 
+     * Wyświetla ścieżkę z aglorytmu Dijkstry lub Bellmana-Forda.
+     */
+    public: void print();
+
+
+    /**
+     * @brief 
+     * Pobiera ciąg wierzchołków tworzących ścieżkę.
+     */
+    public: vector<unsigned> getVerticies() { return path; }
+
+    
+    /**
+     * @brief 
+     * Pobiera długość ścieżki.
+     */
+    public: unsigned getDistance() { return distance; }
+
+};
+
+
+/**
+ * @brief 
+ * Wynik algorytmów Dijkstry oraz Bellmana-Forda
+ */
+class PathfindingResult{
+
+    /* POLA */
+    private: std::vector<Path> paths;       // zbiór ścieżek wyznaczonych z pomocą algorytmu
+    private: unsigned start;                // wierzchołek startowy ścieżki
+
+    /* METODY */
+
+    /**
+     * @brief 
+     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Dijkstry.
+     * 
+     * @param dijkstra_array tablica zawierająca stan wierzchołków na koniec algorytmu 
+     * @param start wierzchołek startowy
+     */
+    public: PathfindingResult(DynamicArray<VertexData>& dijkstra_array, unsigned start);
+
+
+    /**
+     * @brief 
+     * Destruktor. Zwalnia pamięć po wyniku algorytmu Dijkstry lub Bellmana-Forda.
+     */
+    public: ~PathfindingResult() {};
+
+
+    /**
+     * @brief 
+     * Pobiera ścieżkę do wskazanego wierzchołka.
+     * 
+     * @param vertex wierzchołek, do którego ścieżkę pobieramy
+     */
+    public: Path getPathTo(unsigned vertex) { return paths[vertex]; }
+
+
+    /**
+     * @brief 
+     * Wyświetla wynik aglorytmu Dijkstry lub Bellmana-Forda.
+     */
+    public: void print();
+
+};
+
 
 /**
  * @brief 
@@ -51,7 +150,7 @@ class MSTResult{
      * 
      * @param prim_array tablica zawierająca stan wierzchołków na koniec algorytmu
      */
-    public: MSTResult(DynamicArray<PrimVertex>& prim_array);
+    public: MSTResult(DynamicArray<VertexData>& prim_array);
 
 
     /**

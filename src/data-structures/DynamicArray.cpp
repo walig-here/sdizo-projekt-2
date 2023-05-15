@@ -8,7 +8,7 @@
 using namespace std;
 
 template class DynamicArray<int>;
-template class DynamicArray<PrimVertex>;
+template class DynamicArray<VertexData>;
 
 template<typename T> DynamicArray<T>::DynamicArray(){
 
@@ -216,7 +216,7 @@ template<typename T> T* DynamicArray<T>::operator[](unsigned index){
 
 }
 
-template<> int DynamicArray<PrimVertex>::min(){
+template<> int DynamicArray<VertexData>::min(){
 
     // Z pustej tablicy nie da się wyznaczyć minimum
     if(array_address == nullptr) return -1;

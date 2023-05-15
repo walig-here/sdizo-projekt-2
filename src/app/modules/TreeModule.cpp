@@ -38,7 +38,7 @@ void TreeModule::loop(){
             case TREE_LOAD: loadGraph(); break;
 
             // Wyśweitlenie grafu
-            case TREE_PRINT: printGraph(); break;
+            case TREE_PRINT: printGraph(TREE_MODULE); break;
 
             // Algorytm Prima
             case TREE_PRIM: algorithmPrim(); break;
@@ -53,52 +53,6 @@ void TreeModule::loop(){
 
 }
 
-#include "app/utility/FileReader.h"
-void TreeModule::loadGraph(){
-
-    // Pobranie nazwy pliku od użytkownika
-    loaded_graph_data = false;
-    unsigned placeholder;
-    edges = FileReader::readGraphData(Console::getInput("Wprowadz nazwe pliku:"), verticies_amount, placeholder, placeholder);
-
-    // Sprawdzenie, czy wczytywanie odbyło się poprawnie
-    if(edges.size() == 0 && placeholder == 0 && verticies_amount == 0){
-        cout << "Wystapil blad wczytywania danych! Sprobouj ponownie." << endl; 
-        Console::waitForUserResponse();
-        return;
-    }
-
-    // Jeżeli tak, to dane grafu znajdują się już w module
-    loaded_graph_data = true;
-
-}
-
-void TreeModule::printGraph(){
-
-    // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac
-    if(!loaded_graph_data){
-        cout << "Brak danych do wyswietlenia! Wczytaj graf, przed jego wysweitleniem." << endl;
-        Console::waitForUserResponse();
-        return;
-    }
-
-    // Wczytujemy graf
-    graph = chooseRepresentation();
-    if(graph == nullptr){
-        Console::waitForUserResponse();
-        return;
-    }
-
-    // Wyświetlam graf
-    graph->print();
-    Console::waitForUserResponse();
-
-    // Zwolnienie instancji grafu
-    delete graph;
-    graph = nullptr;
-
-}
-
 void TreeModule::algorithmPrim(){
 
     // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac
@@ -109,14 +63,15 @@ void TreeModule::algorithmPrim(){
     }
 
     // Wczytujemy graf
-    graph = chooseRepresentation();
+    graph = chooseRepresentation(TREE_MODULE);
     if(graph == nullptr){
         Console::waitForUserResponse();
         return;
     }
 
-    // Wyświetlam graf
-    MSTResult result = graph->alogrithmPrim(0);
+    // Wykonuję algorytm Prima dla wczytanego aktualnie grafu oraz 
+    // wierzchołka początkowego begin (chociaż może być to dowolny inny wierzchołek)
+    MSTResult result = graph->alogrithmPrim(begin);
     if(result.isEmpty()) cout << "Graf jest pusty!" << endl;
     else result.print();
     Console::waitForUserResponse();

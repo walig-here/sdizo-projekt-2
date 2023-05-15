@@ -90,7 +90,7 @@ void MatrixGraph::print(){
 MSTResult MatrixGraph::alogrithmPrim(unsigned start){
 
     // Inicjalizacja tablicy ze stanami wierzchołków
-    DynamicArray<PrimVertex> prim_array(matrix->getDegree(), PrimVertex());
+    DynamicArray<VertexData> prim_array(matrix->getDegree(), VertexData());
 
     // Sprawdzam, czy wierzchołek startowy znajduje się w grafie
     if(start >= prim_array.getLength()) return MSTResult(prim_array);
@@ -125,5 +125,43 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
     
     // Zwrócenie wyniku algorytmu
     return MSTResult(prim_array);
+
+}
+
+PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
+
+    // Inicjalizacja tablicy ze stanami wierzchołków
+    DynamicArray<VertexData> dijkstra_array(matrix->getDegree(), VertexData());
+
+    // Sprawdzam, czy wierzchołek startowy znajduje się w grafie
+    if(start >= dijkstra_array.getLength()) return PathfindingResult(dijkstra_array, start);
+
+    // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
+    dijkstra_array[start]->weight = 0;
+
+    // Wybieram z tablicy stanów wierzchołków kolejne nierozważone wierzchołki o minimalnej wadze
+    // Jeżeli wszystkie wierzchołki są rozpatrzone, to algorytm może się zakończyć
+    int minimum_vertex_index = -1;      // indeks wierzchołka o minimalnej wadze
+    int path_thourgh_current_vertex = 0;    // długość ścieżki prowadzącej przez obecny wierzchołek
+    while ( (minimum_vertex_index = dijkstra_array.min()) != -1 ){
+        
+        // Pobieram kolejnych sąsiadów. Sprawdzam czy z aktualnego wierzchołka
+        // nie prowadzi do sąsiada niego droga o mniejszej wadze niż dotychczasowa. Jeżeli tak, to 
+        // poprzednikiem sąsiada jest aktualny wierzchołek, a drogą do sąsiada jest ta, biegnąca przez rozważany wierzchołek.
+        for(int i = 0; i < matrix->getDegree(); i++){
+            if(*(matrix->get(minimum_vertex_index, i)) == NO_CONNECTION) continue;
+            path_thourgh_current_vertex = *(matrix->get(minimum_vertex_index, i)) + dijkstra_array[minimum_vertex_index]->weight;
+            if(dijkstra_array[i]->weight <= path_thourgh_current_vertex) continue;
+
+            dijkstra_array[i]->weight = path_thourgh_current_vertex;
+            dijkstra_array[i]->predecessor = minimum_vertex_index;
+        }
+
+        // Wierzchołek uznawany jest za rozważony
+        dijkstra_array[minimum_vertex_index]->processed = true;
+
+    }
+
+    return PathfindingResult(dijkstra_array, start);
 
 }
