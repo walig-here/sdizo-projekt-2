@@ -16,12 +16,17 @@ class PathModule : virtual public Module{
     // Destruktor
     public: virtual ~PathModule();
 
+    // Główna pętla modułu
     public: virtual void loop();
+
+    // Algorytm Dijkstry
+    public: void algorithmDijkstra();
 
 };
 
 enum PathOptions{
     PATH_EXIT,
     PATH_LOAD,
-    PATH_PRINT
+    PATH_PRINT,
+    PATH_DIJKSTRA
 };

@@ -110,6 +110,13 @@ class PathfindingResult{
 
     /**
      * @brief 
+     * Służy do sprawdzenia czy wynik algorytmu nie jest pusty.
+     */
+    public: bool isEmpty();
+
+
+    /**
+     * @brief 
      * Pobiera ścieżkę do wskazanego wierzchołka.
      * 
      * @param vertex wierzchołek, do którego ścieżkę pobieramy

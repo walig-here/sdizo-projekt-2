@@ -10,27 +10,6 @@ using namespace std;
 #include "graphs/MatrixGraph.h"
 void test(){
 
-    // Inicjalizacja grafu
-    vector<EdgeData> edges = {
-        EdgeData(0,1,15),
-        EdgeData(2,0,5),
-        EdgeData(1,2,2),
-        EdgeData(2,4,3),
-        EdgeData(4,2,1),
-        EdgeData(1,3,4),
-        EdgeData(3,1,25),
-        EdgeData(3,4,10),
-        EdgeData(4,3,2)
-    };
-    unsigned v = 5;
-    unsigned start = 3;
-    MatrixGraph graph(v, edges, true);
-
-    // Wykonanie algorytmu
-    PathfindingResult result = graph.algorithmDijkstra(start);
-
-    result.print();
-
 }
 
 /**
@@ -47,9 +26,6 @@ enum mainMenuOptions{
  * @brief Główna pętla aplikacji.
  */
 int main(int argc, char const *argv[]){
-
-    test();
-    return 0;
 
     // Ustalenie opcji w menu głównym
     Menu main_menu("MENU GLOWNE:");

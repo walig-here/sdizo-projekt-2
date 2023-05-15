@@ -42,6 +42,7 @@ Path::Path(DynamicArray<VertexData>& dijkstra_array, unsigned end){
     // że udało się przejść całą ścieżkę.
     int vertex = end;
     distance = dijkstra_array[vertex]->weight;
+    if(distance == INFINITY) return;
     while (vertex != NULL_VERTEX){
         path.insert(path.begin(), vertex);
         vertex = dijkstra_array[vertex]->predecessor;
@@ -65,6 +66,9 @@ void MSTResult::print(){
 
 void Path::print(){
 
+    // Jeżeli ścieżka nie istnieje to nie ma co wyświetlać
+    if(path.size() == 0) return;
+
     // Koniec ścieżki oraz jej długość
     printf("%4u | %4d | ", path[path.size()-1], distance);
 
@@ -85,7 +89,8 @@ void PathfindingResult::print(){
 
     // Ścieżki
     for(int i = 0; i < paths.size(); i++)
-        paths[i].print();
+        if(i != start)
+            paths[i].print();
 
 }
 
@@ -97,5 +102,14 @@ PathfindingResult::PathfindingResult(DynamicArray<VertexData>& dijkstra_array, u
     // Tworzymy ścieżki dla kolejnych wierzchołków
     for(int i = 0; i < dijkstra_array.getLength(); i++)
             paths.push_back(Path(dijkstra_array, i));
+
+}
+
+bool PathfindingResult::isEmpty(){
+
+    for(auto path : paths)
+        if(path.getVerticies().size() > 0)
+            return false;
+    return true;
 
 }
