@@ -11,8 +11,8 @@
 #include "data-structures/DynamicArray.h"
 #include <vector>
 
-#define NULL_VERTEX -2147483648     // oznacza wierchołek NULL
-#define INFINITY 2147483647         // waga krawędzi równa nieskończoność
+#define INFINITY_W 2147483647            // waga krawędzi równa nieskończoność
+#define NULL_VERTEX -2147483648         // oznacza wierchołek NULL
 
 /**
  * @brief 
@@ -23,7 +23,7 @@ struct VertexData{
     /* POLA */
     bool processed = false;             // stan rozważenia wierzchołka
     int predecessor = NULL_VERTEX;      // wierzchołek poprzedni
-    int weight = INFINITY;              // waga krawędzi łączącej wierzchołek z poprzenikiem
+    int weight = INFINITY_W;              // waga krawędzi łączącej wierzchołek z poprzenikiem
 
 };
 

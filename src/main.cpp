@@ -7,25 +7,10 @@ using namespace std;
 
 
 // testowanie funkcji, które nie przeszły testu jednostkowego
+#include "graphs/ListGraph.h"
 #include "graphs/MatrixGraph.h"
+#include "app/utility/GraphGenerator.h"
 void test(){
-
-    // Tworzenie grafu
-    vector<EdgeData> edges = {
-        EdgeData(0,2,2),
-        EdgeData(2,0,-1),
-        EdgeData(0,1,10),
-        EdgeData(1,3,-1),
-        EdgeData(3,2,11)
-    };
-    unsigned v = 4;
-    MatrixGraph graph(v, edges, true);
-    unsigned start = 2;
-
-    // Wykonanie algorytmu
-    PathfindingResult result = graph.algorithmBellmanFord(start);
-
-    result.print();
 
 }
 

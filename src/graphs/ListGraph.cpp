@@ -209,7 +209,7 @@ PathfindingResult ListGraph::algorithmBellmanFord(unsigned start){
         better_path_found = false;
         for(int edge_index = 0; edge_index < edges.getLength(); edge_index++){
             edge = edges[edge_index];
-            if(bf_array[edge->begin]->weight == INFINITY) continue;
+            if(bf_array[edge->begin]->weight == INFINITY_W) continue;
             if(bf_array[edge->end]->weight <= edge->weigth + bf_array[edge->begin]->weight) continue;
 
             better_path_found = true;

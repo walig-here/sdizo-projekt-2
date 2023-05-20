@@ -5,7 +5,7 @@ class MSTResult;
 class PathfindingResult;
 
 
-#define NO_CONNECTION -2147483648   // oznaczenie braku połączenia między wierzchołkami
+#define NO_CONNECTION -2147483648       // oznaczenie braku połączenia między wierzchołkami
 
 /**
  * @brief 

@@ -42,7 +42,7 @@ Path::Path(DynamicArray<VertexData>& dijkstra_array, unsigned end){
     // że udało się przejść całą ścieżkę.
     int vertex = end;
     distance = dijkstra_array[vertex]->weight;
-    if(distance == INFINITY) return;
+    if(distance == INFINITY_W) return;
     while (vertex != NULL_VERTEX){
         path.insert(path.begin(), vertex);
         vertex = dijkstra_array[vertex]->predecessor;

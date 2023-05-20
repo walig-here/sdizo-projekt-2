@@ -1,3 +1,4 @@
+#pragma once
 #include "graphs/Graph.h"
 #include "data-structures/Matrix.h"
 #include "data-structures/AlgorithmResults.h"
