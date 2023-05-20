@@ -2,8 +2,6 @@
 #include "data-structures/Matrix.h"
 #include "data-structures/AlgorithmResults.h"
 
-#define NO_CONNECTION -2147483648   // oznaczenie braku połączenia między wierzchołkami
-
 /**
  * @brief 
  * Reprezentuje graf zaimplementowany w formie macierzy sąsiedztwa.
@@ -33,6 +31,15 @@ class MatrixGraph : public Graph{
      * Destruktor. Zwalnia pamięć po grafie.
      */
     public: ~MatrixGraph();
+
+
+    /**
+     * @brief 
+     * Zwraca listę krawędzi grafu.
+     * 
+     * @param directional wskazuje czy krawędzie są skierowane
+     */
+    public: DynamicArray<EdgeData> getEdgesList(bool directional);
 
 
     /**
@@ -87,6 +94,6 @@ class MatrixGraph : public Graph{
      * @brief 
      * Wynokuje algorytm Bellmana-Forda na grafie.
      */
-    public: virtual void algorithmBellmanFord() {};
+    public: virtual PathfindingResult algorithmBellmanFord(unsigned start);
 
 };

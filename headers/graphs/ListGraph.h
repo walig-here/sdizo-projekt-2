@@ -43,6 +43,15 @@ class ListGraph : public Graph{
 
     /**
      * @brief 
+     * Zwraca listę krawędzi grafu.
+     * 
+     * @param directional wskazuje czy krawędzie są skierowane
+     */
+    public: DynamicArray<EdgeData> getEdgesList(bool directional);
+
+
+    /**
+     * @brief 
      * Wyświetla graf.
      */
     public: virtual void print();
@@ -90,7 +99,7 @@ class ListGraph : public Graph{
      * @brief 
      * Wynokuje algorytm Bellmana-Forda na grafie.
      */
-    public: virtual void algorithmBellmanFord() {};
+    public: virtual PathfindingResult algorithmBellmanFord(unsigned start);
 
 
 };

@@ -1,7 +1,33 @@
 #pragma once
+#include "data-structures/DynamicArray.h"
 
 class MSTResult;
 class PathfindingResult;
+
+
+#define NO_CONNECTION -2147483648   // oznaczenie braku połączenia między wierzchołkami
+
+/**
+ * @brief 
+ * Struktura zawierająca dane na temat pojedynczej krawedzi
+ */
+struct EdgeData{
+
+    /* POLA */
+    unsigned begin = -1;                // wierzchołek początkowy
+    unsigned end = -1;                  // wierzchołek końcowy
+    int weigth = NO_CONNECTION;         // waga krawędzi
+
+    /* KONSTRUKTOR */
+    EdgeData(unsigned begin, unsigned end, int weigth);
+
+    /* KONSTRUKTOR DOMYŚLNY */
+    EdgeData(){
+        begin = end = -1;
+        weigth = NO_CONNECTION;
+    }
+
+};
 
 /**
  * @brief 
@@ -19,6 +45,14 @@ class Graph{
      * Destruktor. 
      */
     public: ~Graph() {};
+
+    /**
+     * @brief 
+     * Zwraca listę krawędzi grafu.
+     * 
+     * @param directional wskazuje czy krawędzie są skierowane
+     */
+    public: virtual DynamicArray<EdgeData> getEdgesList(bool directional) = 0;
 
 
     /**
@@ -70,23 +104,6 @@ class Graph{
      * @brief 
      * Wynokuje algorytm Bellmana-Forda na grafie.
      */
-    public: virtual void algorithmBellmanFord() = 0;
-
-};
-
-
-/**
- * @brief 
- * Struktura zawierająca dane na temat pojedynczej krawedzi
- */
-struct EdgeData{
-
-    /* POLA */
-    unsigned begin;     // wierzchołek początkowy
-    unsigned end;       // wierzchołek końcowy
-    int weigth;         // waga krawędzi
-
-    /* KONSTRUKTOR */
-    EdgeData(unsigned begin, unsigned end, int weigth);
+    public: virtual PathfindingResult algorithmBellmanFord(unsigned start) = 0;
 
 };

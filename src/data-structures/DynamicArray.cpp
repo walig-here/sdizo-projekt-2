@@ -7,8 +7,11 @@
 
 using namespace std;
 
+class EdgeData;
+
 template class DynamicArray<int>;
 template class DynamicArray<VertexData>;
+template class DynamicArray<EdgeData>;
 
 template<typename T> DynamicArray<T>::DynamicArray(){
 

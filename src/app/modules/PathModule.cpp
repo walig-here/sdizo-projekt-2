@@ -9,6 +9,7 @@ PathModule::PathModule() : Module("WYZNACZANIE NAJKROTSZEJ SCIEZKI:"){
     menu->addOption(PATH_LOAD, "Wczytaj graf z pliku");
     menu->addOption(PATH_PRINT, "Wyswietl graf");
     menu->addOption(PATH_DIJKSTRA, "Algorytm Dijkstry");
+    menu->addOption(PATH_BELLMAN_FORD, "Algorytm Bellmana-Forda");
 
 }
 
@@ -40,6 +41,9 @@ void PathModule::loop(){
             // Algorytm Dijkstry
             case PATH_DIJKSTRA: algorithmDijkstra(); break;
 
+            // Algorytm Bellmana-Forda
+            case PATH_BELLMAN_FORD: algorithmBellmanFord(); break;
+
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;
         
@@ -51,6 +55,47 @@ void PathModule::loop(){
 }
 
 #include "data-structures/AlgorithmResults.h"
+void PathModule::algorithmBellmanFord(){
+
+    // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac
+    if(!loaded_graph_data){
+        cout << "Brak danych! Wczytaj graf, przed wykonaniem na nim algorytmu." << endl;
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Wczytujemy graf
+    graph = chooseRepresentation(PATH_MODULE);
+    if(graph == nullptr){
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Pobieram wierzchołek początkowy
+    unsigned start;
+    try{
+        start = Console::getIntInput("Podaj wierzcholek startowy:");
+    }catch(const std::exception& e){
+        std::cerr << e.what() << '\n';
+        Console::waitForUserResponse();
+        delete graph; graph = nullptr;
+        return;
+    }
+    
+
+    // Wykonuję algorytm Belmanna-Forda dla wczytanego aktualnie grafu oraz 
+    // wierzchołka początkowego
+    PathfindingResult result = graph->algorithmDijkstra(start);
+    if(result.isEmpty()) cout << "Z zadanego wierzcholka nie da wyznaczyc zadnej sciezki!" << endl;
+    else result.print();
+    Console::waitForUserResponse();
+
+    // Zwolnienie instancji grafu
+    delete graph;
+    graph = nullptr;
+
+}
+
 void PathModule::algorithmDijkstra(){
 
     // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac

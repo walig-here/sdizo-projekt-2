@@ -22,11 +22,15 @@ class PathModule : virtual public Module{
     // Algorytm Dijkstry
     public: void algorithmDijkstra();
 
+    // Algorytm Bellmana-Forda
+    public: void algorithmBellmanFord();
+
 };
 
 enum PathOptions{
     PATH_EXIT,
     PATH_LOAD,
     PATH_PRINT,
-    PATH_DIJKSTRA
+    PATH_DIJKSTRA,
+    PATH_BELLMAN_FORD
 };
