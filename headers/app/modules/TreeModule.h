@@ -20,11 +20,15 @@ class TreeModule : virtual public Module{
 
     private: void algorithmPrim();
 
+    // Algorytm Kruskala
+    public: void algorithmKruskal();
+
 };
 
 enum TreeOptions{
     TREE_EXIT,
     TREE_LOAD,
     TREE_PRINT,
-    TREE_PRIM
+    TREE_PRIM,
+    TREE_KRUSKAL
 };

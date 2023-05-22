@@ -287,6 +287,59 @@ TEST(BellmanFord, FiveVertexGraph){
 
 }
 
+// Algorytm Kruskala
+TEST(Kruskal, FiveVertexGraph){
+
+    // Inicjalizacja grafu
+    vector<EdgeData> edges = {
+        EdgeData(1, 2, 10),
+        EdgeData(1, 0, 3),
+        EdgeData(2, 0, 15),
+        EdgeData(2, 4, 16),
+        EdgeData(0, 3, 3),
+        EdgeData(0, 4, 7),
+        EdgeData(3, 4, 13)
+    };
+    unsigned verticies = 5;
+    MatrixGraph graph(verticies, edges, false);
+
+    // Wykonanie algorytmu
+    MSTResult result = graph.algorithmKruskal();
+
+    // Sprawdzenie
+    ASSERT_EQ(result.getMST(), 23);
+
+    vector<EdgeData> mst_proper_edges = {
+        EdgeData(1,0,3),
+        EdgeData(0,3,3),
+        EdgeData(0,4,7),
+        EdgeData(1,2,10)
+    };
+    vector<EdgeData> mst_edges = result.getEdges();
+    bool found;
+    for(auto proper_edge : mst_proper_edges){
+        found = false;
+        for(auto edge : mst_edges){
+            if(!((proper_edge.begin == edge.begin && proper_edge.end == edge.end) || (proper_edge.end == edge.begin && proper_edge.begin == edge.end)))
+                continue;
+            if(proper_edge.weigth != edge.weigth) continue;
+
+            found = true;
+            break;
+        }
+        ASSERT_TRUE(found);
+    }
+
+}
+
+TEST(Kruskal, EmptyGraph){
+
+    MatrixGraph graph(0, {}, false);
+    MSTResult result = graph.algorithmKruskal();
+    ASSERT_TRUE(result.isEmpty());
+
+}
+
 // Entry point modułu testującego klasę Arithmetic
 int main(int argc, char const *argv[])
 {

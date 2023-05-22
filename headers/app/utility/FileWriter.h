@@ -1,6 +1,8 @@
 #include <vector>
 #include <iostream>
 
+#include "graphs/Graph.h"
+
 using namespace std;
 
 // Klasa służąca do zapisu danych do pliku
@@ -19,5 +21,8 @@ class FileWriter{
 
     // Zapisuje dane alfanumeryczne do pliku
     public: static bool save(vector<string> lines, string file);
+
+    // Zapisuje graf do pliku
+    public: static bool saveGraph(string file_name, int verticies, int start, int end, DynamicArray<EdgeData> edges);
 
 };

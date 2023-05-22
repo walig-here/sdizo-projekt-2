@@ -8,7 +8,7 @@ using namespace std;
 template <typename T> class DynamicArray{    
 
     /* POLA */
-    private: T* array_address;        // adres pierwszej komórki w tablicy
+    private: T* array_address;          // adres pierwszej komórki w tablicy
     private: unsigned length;           // aktualna długość tablicy
 
     /* MEOTDY */

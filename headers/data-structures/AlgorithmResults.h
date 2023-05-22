@@ -11,19 +11,19 @@
 #include "data-structures/DynamicArray.h"
 #include <vector>
 
-#define INFINITY_W 2147483647            // waga krawędzi równa nieskończoność
-#define NULL_VERTEX -2147483648         // oznacza wierchołek NULL
+#define INFINITY_W 2147483647               // waga krawędzi równa nieskończoność
+#define NULL_VERTEX -2147483648             // oznacza wierchołek NULL
 
 /**
  * @brief 
- * Element tablicy obrazującej stan wierzchołka wewnątrz algorytmu Prima lub Dijkstry.
+ * Element tablicy obrazującej stan wierzchołka wewnątrz algorytmu.
  */
 struct VertexData{
 
     /* POLA */
     bool processed = false;             // stan rozważenia wierzchołka
     int predecessor = NULL_VERTEX;      // wierzchołek poprzedni
-    int weight = INFINITY_W;              // waga krawędzi łączącej wierzchołek z poprzenikiem
+    int weight = INFINITY_W;            // waga krawędzi łączącej wierzchołek z poprzenikiem
 
 };
 
@@ -44,9 +44,10 @@ class Path{
      * Konstruktor. Tworzy strukturę przechowującą ścieżkę z algorytmu Dijkstry.
      * 
      * @param dijkstra_array tablica zawierająca stan wierzchołków na koniec algorytmu
+     * @param start wierzchołek startowy
      * @param end wierzchołek końcowy
      */
-    public: Path(DynamicArray<VertexData>& dijkstra_array, unsigned end);
+    public: Path(DynamicArray<VertexData>& dijkstra_array, unsigned start, unsigned end);
 
 
     /**
@@ -54,6 +55,7 @@ class Path{
      * Destruktor. Zwalnia pamięć po ścieżce z algorytmu Dijkstry.
      */
     public: ~Path() {};
+    
 
 
     /**
@@ -153,11 +155,20 @@ class MSTResult{
 
     /**
      * @brief 
-     * Kontruktor. Tworzy pustą strukturę przechowującą wynik algorytmu Prima.
+     * Kontruktor. Tworzy strukturę przechowującą wynik algorytmu Prima.
      * 
      * @param prim_array tablica zawierająca stan wierzchołków na koniec algorytmu
      */
     public: MSTResult(DynamicArray<VertexData>& prim_array);
+
+
+    /**
+     * @brief 
+     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Kruskala.
+     * 
+     * @param kruskal_array tablica wynikowa algorytmu, zawierająca krawędzie składające się na MST
+     */
+    public: MSTResult(DynamicArray<EdgeData>& kruskal_array);
 
 
     /**

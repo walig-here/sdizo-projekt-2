@@ -73,13 +73,21 @@ class MatrixGraph : public Graph{
     /**
      * @brief 
      * Wykonuje algorytm Kruskalla na grafie.
+     * 
+     * @return Wynik alfgorytmu Kruskala w formie zbioru krawędzi oraz sumy wag krawędzi MST.
+     * Wypadku, gdy algorytm zostanie wykonany na grafie pustym lub niespójnym, to zwrócony 
+     * zostanie pusty wynik.
      */
-    public: virtual void algorithmKruskal() {};
+    public: virtual MSTResult algorithmKruskal();
 
 
     /**
      * @brief 
-     * Wykonuje algorytm Prima na grafie.
+     * Wykonuje algorytm Prima na grafie. 
+     * 
+     * @return Wynik alfgorytmu Kruskala w formie zbioru krawędzi oraz sumy wag krawędzi MST.
+     * Wypadku, gdy algorytm zostanie wykonany na grafie pustym lub niespójnym, to zwrócony 
+     * zostanie pusty wynik.
      */
     public: virtual MSTResult alogrithmPrim(unsigned start);
 
@@ -96,5 +104,11 @@ class MatrixGraph : public Graph{
      * Wynokuje algorytm Bellmana-Forda na grafie.
      */
     public: virtual PathfindingResult algorithmBellmanFord(unsigned start);
+
+    /**
+     * @brief 
+     * Zwraca prawdę, jeżeli w grafie znajduje się waga o ujemnej krawędzi.
+     */
+    public: virtual bool containNegativeEdges();
 
 };

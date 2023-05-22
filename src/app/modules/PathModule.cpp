@@ -85,8 +85,8 @@ void PathModule::algorithmBellmanFord(){
 
     // Wykonuję algorytm Belmanna-Forda dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego
-    PathfindingResult result = graph->algorithmDijkstra(start);
-    if(result.isEmpty()) cout << "Z zadanego wierzcholka nie da wyznaczyc zadnej sciezki!" << endl;
+    PathfindingResult result = graph->algorithmBellmanFord(start);
+    if(result.isEmpty()) cout << "Graf zawiera ujemny cykl!" << endl;
     else result.print();
     Console::waitForUserResponse();
 
@@ -127,7 +127,7 @@ void PathModule::algorithmDijkstra(){
     // Wykonuję algorytm Dijkstry dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego
     PathfindingResult result = graph->algorithmDijkstra(start);
-    if(result.isEmpty()) cout << "Z zadanego wierzcholka nie da wyznaczyc zadnej sciezki!" << endl;
+    if(result.isEmpty()) cout << "Graf zawiera ujemne krawedzie!" << endl;
     else result.print();
     Console::waitForUserResponse();
 

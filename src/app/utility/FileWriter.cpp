@@ -35,3 +35,22 @@ bool FileWriter::save(vector<string> lines, string file_name){
     return true;
 
 }
+
+bool FileWriter::saveGraph(string file_name, int verticies, int start, int end, DynamicArray<EdgeData> edges){
+
+    // Próbujemy stworzyć plik, do którego zapiszemy nasze liczby
+    fstream file;
+    file.open(file_name, ios::out);
+    if(!file.good()) return false;
+
+    // Zapisujemy
+    file << verticies << " " << edges.getLength() << " " << start << " " << end << endl;
+    for(int i = 0; i < edges.getLength(); i++)
+        file << edges[i]->begin << " " << edges[i]->end << " " << edges[i]->weigth << endl;
+
+
+    // Koniec
+    file.close();
+    return true;
+
+}

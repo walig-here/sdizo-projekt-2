@@ -184,6 +184,20 @@ template<> void DynamicArray<int>::print(){
 
 }
 
+template<> void DynamicArray<EdgeData>::print(){
+
+    printf("Zawartosc tablicy:\n");
+    if(length == 0) {
+        printf("pusta\n");
+        return;
+    }
+
+    for(int i = 0; i < length; i++) 
+        cout << "(" << array_address[i].begin << " " << array_address[i].end << " " << array_address[i].weigth << ")" << ", ";
+    printf("\n");
+
+}
+
 template<typename T> void DynamicArray<T>::pop_back(){
 
     // Z pustej tablicy nie usuwam

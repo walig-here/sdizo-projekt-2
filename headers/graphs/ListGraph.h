@@ -78,8 +78,11 @@ class ListGraph : public Graph{
     /**
      * @brief 
      * Wykonuje algorytm Kruskalla na grafie.
+     * 
+     * @return Wynik alfgorytmu Kruskala w formie zbioru krawędzi oraz sumy wag krawędzi.
+     * Wypadku, gdy algorytm zostanie wykonany na grafie pustym, to zwrócony zostanie pusty wynik.
      */
-    public: virtual void algorithmKruskal() {};
+    public: virtual MSTResult algorithmKruskal();
 
 
     /**
@@ -101,6 +104,13 @@ class ListGraph : public Graph{
      * Wynokuje algorytm Bellmana-Forda na grafie.
      */
     public: virtual PathfindingResult algorithmBellmanFord(unsigned start);
+
+
+    /**
+     * @brief 
+     * Zwraca prawdę, jeżeli w grafie znajduje się waga o ujemnej krawędzi.
+     */
+    public: virtual bool containNegativeEdges();
 
 
 };

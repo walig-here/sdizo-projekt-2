@@ -29,3 +29,4 @@ bool RandomNumberGenerator::generateThenSaveIntegers(string file, long long unsi
     return false;
 
 }
+

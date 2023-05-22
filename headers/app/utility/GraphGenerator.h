@@ -28,8 +28,9 @@ class GraphGenerator{
      * @param size wielkość grafu, liczba wierzchołków
      * @param directed czy graf jest skierowany?
      * @param density gęstość wygenerowanego grafu z zakresu od 0 do 1
+     * @param not_negative czy graf może zawierać wyłącznie krawędzie o nieujmenych wagach?
      */
-    public: static Graph* generateGraph(GraphRepresentations representation, int size, bool directed, float density);
+    public: static Graph* generateGraph(GraphRepresentations representation, int size, bool directed, float density, bool not_negative);
 
 
     /**
@@ -38,21 +39,28 @@ class GraphGenerator{
      * są unikalne.
      * 
      * @param verticies liczba wierzchołków
-     * @param edges_count liczba krawędzi
+     * @param edges_count docelowa liczba krawędzi
+     * @param max_egdes_count maksymalna liczba krawędzi
      * @param directed czy krawędzie mogą być skierowane
+     * @param not_negative czy krawędzie mogą mieć wyłącznie nieujemne wagi?
      */
-    private: static vector<EdgeData> getRandomEdges(int verticies, long long edges_count, bool directed);
+    private: static vector<EdgeData> getRandomEdges(int verticies, long long edges_count, long long max_egdes_count, bool directed, bool not_negative);
 
 
     /**
      * @brief 
-     * Zwraca prawdę, gdy krawędź zawierająca dane wierzchołki nie znajduje się w zadanym zbiorze.
+     * Zwraca wszystkie możliwe kombinacje krawędzi w grafie o zadanej liczbie wierzchołków.
      * 
-     * @param edges_set przeszukiwany zbiór krawędzi
-     * @param start początek krawędzi
-     * @param end koniec krawędzi
-     * @param directed czy krawędź jest skierowana
+     * @param vertitices ilość wierzchołków
+     * @param directed czy wierzchołki mają być skierowane
      */
-    private: static bool edgeExistIn(vector<EdgeData> edges_set, int start, int end, bool directed);
+    private: static vector<EdgeData> getAllPossibleEdges(int verticies, bool directed, int max_egde_count);
+
+
+    /**
+     * @brief 
+     * Zwraca silnię z zadanej nieujemnej liczby całkowitej.
+     */
+    private: static long long factorial(int n);
 
 };

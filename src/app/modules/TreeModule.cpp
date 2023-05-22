@@ -12,6 +12,7 @@ TreeModule::TreeModule() : Module("WYZNACZANIE MINIMALNEGO DRZEWA ROZPINAJACEGO:
     menu->addOption(TREE_LOAD, "Wczytaj graf z pliku");
     menu->addOption(TREE_PRINT, "Wyswietl graf");
     menu->addOption(TREE_PRIM, "Algorytm Prima");
+    menu->addOption(TREE_KRUSKAL, "Algorytm Kruskala");
 
 }
 
@@ -43,6 +44,9 @@ void TreeModule::loop(){
             // Algorytm Prima
             case TREE_PRIM: algorithmPrim(); break;
 
+            // Algorytm Kruskala
+            case TREE_KRUSKAL: algorithmKruskal(); break;
+
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;
         
@@ -50,6 +54,35 @@ void TreeModule::loop(){
 
     }
     
+
+}
+
+void TreeModule::algorithmKruskal(){
+
+    // Sprawdzamy, czy moduł ma dane niezbędne do wczytania grafu, jeżeli nie, to każemy użytkownikowi je wczytac
+    if(!loaded_graph_data){
+        cout << "Brak danych! Wczytaj graf, przed wykonaniem na nim algorytmu." << endl;
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Wczytujemy graf
+    graph = chooseRepresentation(TREE_MODULE);
+    if(graph == nullptr){
+        Console::waitForUserResponse();
+        return;
+    }
+
+    // Wykonuję algorytm Kruskala dla wczytanego aktualnie grafu oraz 
+    // wierzchołka początkowego begin (chociaż może być to dowolny inny wierzchołek)
+    MSTResult result = graph->algorithmKruskal();
+    if(result.isEmpty()) cout << "Blad wykonywania algorytmu! Graf jest pusty lub niespojny!" << endl;
+    else result.print();
+    Console::waitForUserResponse();
+
+    // Zwolnienie instancji grafu
+    delete graph;
+    graph = nullptr;
 
 }
 
@@ -72,7 +105,7 @@ void TreeModule::algorithmPrim(){
     // Wykonuję algorytm Prima dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego begin (chociaż może być to dowolny inny wierzchołek)
     MSTResult result = graph->alogrithmPrim(begin);
-    if(result.isEmpty()) cout << "Graf jest pusty!" << endl;
+    if(result.isEmpty()) cout << "Blad wykonywania algorytmu! Graf jest pusty lub niespojny!" << endl;
     else result.print();
     Console::waitForUserResponse();
 
