@@ -3,14 +3,9 @@
 #include "app/utility/Console.h"
 #include "app/modules/Module.h"
 #include "app/utility/GraphGenerator.h"
+#include "examinations/Examination.h"
 
 using namespace std;
-
-
-// testowanie funkcji, które nie przeszły testu jednostkowego
-#include "graphs/ListGraph.h"
-#include "graphs/MatrixGraph.h"
-#include "app/utility/SortingMachine.h"
 
 /**
  * @brief Zbiór opcji dostępnych w głównym menu aplikacji.
@@ -19,7 +14,8 @@ enum mainMenuOptions{
     MENU_EXIT,
     MENU_TREE_MODULE,
     MENU_PATH_MODULE,
-    MENU_GENERATE_GRAPH
+    MENU_GENERATE_GRAPH,
+    MENU_EXAMINATION
 };
 
 
@@ -41,6 +37,7 @@ int main(int argc, char const *argv[]){
     main_menu.addOption(MENU_TREE_MODULE, "Wyszukiwanie minimalnego drzewa rozpinajacego");
     main_menu.addOption(MENU_PATH_MODULE, "Wyszukiwanie najkrotszej sciezki w grafie");
     main_menu.addOption(MENU_GENERATE_GRAPH, "Wygeneruj losowy graf");
+    main_menu.addOption(MENU_EXAMINATION, "Przeprowadz badania algorytmow");
 
     // Główna pętla aplikacji
     bool is_running = true;
@@ -60,6 +57,12 @@ int main(int argc, char const *argv[]){
 
             // Wygenerowanie losowego grafu
             case MENU_GENERATE_GRAPH: generateGraph(); break;
+
+            // Przeprowadzenie badań
+            case MENU_EXAMINATION: {
+                Examination examination;
+                examination.examineAlgorithm();
+            }break;
 
             // Niezdefiniowana opcja
             default: Console::waitForUserResponse(); break;

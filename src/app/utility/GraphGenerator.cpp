@@ -14,8 +14,6 @@ Graph* GraphGenerator::generateGraph(GraphRepresentations representation, int si
     else max_edge_count = (size*size - size)/2;
 
     // Generowanie krawędzi
-    cout << "Ilosc wierzcholkow: " << size << endl;
-    cout << "Ilosc krawedzi: " << max_edge_count << endl;
     vector<EdgeData> edges = getRandomEdges(size, max_edge_count * density , max_edge_count, directed, not_negative);
 
     // Tworzony jest graf w odpowiedniej reprezentacji
@@ -27,34 +25,38 @@ Graph* GraphGenerator::generateGraph(GraphRepresentations representation, int si
 
 vector<EdgeData> GraphGenerator::getRandomEdges(int verticies, long long edges_count, long long max_egdes_count, bool directed, bool not_negative){
 
-    // Jeżeli mamy wykluczyć wszystkie krawędzie, to optymalniej jest zwrócić pusty zbiór krawędzi
-    if(edges_count == 0) return vector<EdgeData>();
-
-    // Z puli wszystkich dostępnych krawędzi wykluczam losowo część.
-    // Wielkość tej części to różnica między wszystkimi krawędziami, a ilością krawędzi, która ma znaleźć
-    // się docelowo w grafie. W ten sposób uzyskuję losowy zbiór krawędzi dla generowanego grafu.
+    // Generuję zbiór wszystkich możliwych krawędzi
     vector<EdgeData> possible_edges = getAllPossibleEdges(verticies, directed, max_egdes_count, not_negative);
-    long long chosen_edge_data;
-    for(long long i = 0; i < max_egdes_count-edges_count; i++){
-        chosen_edge_data = RandomNumberGenerator::getIntegers(1, 0, possible_edges.size()-1)[0];
-        possible_edges.erase(possible_edges.begin() + chosen_edge_data);
+    vector<EdgeData> chosen_edges(min(edges_count, max_egdes_count - edges_count));
+
+    // Rozdzielam zbiór wszystkich możliwych krawędzi na 2 podzbiory: odrzucony i nieodrzucony.
+    // Z metody zawsze zwracany jest zbiór nieodrzucony. Jest to ten zbiór, którego liczebność 
+    // wynosi edges_count (docelowa liczbę krawędzi generowanego grafu). Zbiory buduję przenosząc 
+    // losowo krawędzie ze zbioru possible_edges do chosen_edges, który ma zawsze najmniejszą możliwą
+    // liczebność równą edges_count lub (max_egdes_count- edge_count). W ten sposób zawsze
+    // muszę wykonać minimalną ilość losowań i przeniesień. Z metody zwracam ten zbiór, który
+    // ma liczebność edge_count (jest to zbiór krawędzi nieodrzuconych).
+    long long chosen_edge_index;
+    for(long long i = 0; i < chosen_edges.size(); i++){
+        chosen_edge_index = RandomNumberGenerator::getIntegers(1, 0, possible_edges.size()-1)[0];
+        chosen_edges[i] = possible_edges[chosen_edge_index];
+        possible_edges.erase(possible_edges.begin() + chosen_edge_index);
     }
     
-    return possible_edges;
+    if(possible_edges.size() == edges_count) return possible_edges;
+    return chosen_edges;
 
 }
 
 vector<EdgeData> GraphGenerator::getAllPossibleEdges(int verticies, bool directed, int max_egde_count, bool not_negative){
 
     vector<EdgeData> combinations(max_egde_count);
-    int weight;
+    vector<int> weights = RandomNumberGenerator::getIntegers(max_egde_count, ( not_negative ? 0 : 2*CHAR_MIN ), 2*CHAR_MAX);
     long long combination_index = 0;
     for(int i = 0; i < verticies; i++){
         for(int j = 0; j < verticies; j++){
             if(!directed && j <= i) continue;
-        
-            weight = RandomNumberGenerator::getIntegers(1, ( not_negative ? 0 : 2*CHAR_MIN ), 2*CHAR_MAX)[0];
-            combinations[combination_index] = EdgeData(i, j, weight);
+            combinations[combination_index] = EdgeData(i, j, weights[combination_index]);
             combination_index++;
         }
     }
