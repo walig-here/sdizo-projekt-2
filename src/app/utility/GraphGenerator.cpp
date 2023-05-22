@@ -9,12 +9,13 @@ Graph* GraphGenerator::generateGraph(GraphRepresentations representation, int si
 
     // Maksymalna ilość krawędzi w grafie nieskierowanym -> |V| po 2
     // W grafie skierowanym -> V^2
-    long long max_edge_count;
+    unsigned long long max_edge_count;
     if(directed) max_edge_count = size*size;
-    else if(size < 2) max_edge_count = 0;
-    else max_edge_count = factorial(size)/(factorial(size - 2) * 2);
+    else max_edge_count = (size*size - size)/2;
 
     // Generowanie krawędzi
+    cout << "Ilosc wierzcholkow: " << size << endl;
+    cout << "Ilosc krawedzi: " << max_edge_count << endl;
     vector<EdgeData> edges = getRandomEdges(size, max_edge_count * density , max_edge_count, directed, not_negative);
 
     // Tworzony jest graf w odpowiedniej reprezentacji
@@ -26,37 +27,24 @@ Graph* GraphGenerator::generateGraph(GraphRepresentations representation, int si
 
 vector<EdgeData> GraphGenerator::getRandomEdges(int verticies, long long edges_count, long long max_egdes_count, bool directed, bool not_negative){
 
-    // Inicjowanie miejsca na krawędzie
-    vector<EdgeData> edges(edges_count);
+    // Jeżeli mamy wykluczyć wszystkie krawędzie, to optymalniej jest zwrócić pusty zbiór krawędzi
+    if(edges_count == 0) return vector<EdgeData>();
 
-    // Losujemy kolejno wagę krawędzi oraz jej wierzchołki składowe
-    // Dla skierowanego losowanie odbywa się z pełnej puli
-    // Dla nieskierowanego losowanie odbywa się z puli pomniejszonej o wierzołek początkowy
-    vector<EdgeData> possible_edges = getAllPossibleEdges(verticies, directed, max_egdes_count);
+    // Z puli wszystkich dostępnych krawędzi wykluczam losowo część.
+    // Wielkość tej części to różnica między wszystkimi krawędziami, a ilością krawędzi, która ma znaleźć
+    // się docelowo w grafie. W ten sposób uzyskuję losowy zbiór krawędzi dla generowanego grafu.
+    vector<EdgeData> possible_edges = getAllPossibleEdges(verticies, directed, max_egdes_count, not_negative);
     long long chosen_edge_data;
-    for(long long i = 0; i < edges_count; i++){
+    for(long long i = 0; i < max_egdes_count-edges_count; i++){
         chosen_edge_data = RandomNumberGenerator::getIntegers(1, 0, possible_edges.size()-1)[0];
-        edges[i].begin = possible_edges[chosen_edge_data].begin;
-        edges[i].end = possible_edges[chosen_edge_data].end;
-        edges[i].weigth = ( not_negative ? abs(possible_edges[chosen_edge_data].weigth) : possible_edges[chosen_edge_data].weigth );
         possible_edges.erase(possible_edges.begin() + chosen_edge_data);
     }
     
-    return edges;
+    return possible_edges;
 
 }
 
-long long GraphGenerator::factorial(int n){
-
-    if(n < 2) return 1;
-    long long factorial = 1;
-    for(int i = 2; i <= n; i++)
-        factorial *= i;
-    return factorial;
-
-}
-
-vector<EdgeData> GraphGenerator::getAllPossibleEdges(int verticies, bool directed, int max_egde_count){
+vector<EdgeData> GraphGenerator::getAllPossibleEdges(int verticies, bool directed, int max_egde_count, bool not_negative){
 
     vector<EdgeData> combinations(max_egde_count);
     int weight;
@@ -64,8 +52,8 @@ vector<EdgeData> GraphGenerator::getAllPossibleEdges(int verticies, bool directe
     for(int i = 0; i < verticies; i++){
         for(int j = 0; j < verticies; j++){
             if(!directed && j <= i) continue;
-            
-            weight = RandomNumberGenerator::getIntegers(1, 2*CHAR_MIN, 2*CHAR_MAX)[0];
+        
+            weight = RandomNumberGenerator::getIntegers(1, ( not_negative ? 0 : 2*CHAR_MIN ), 2*CHAR_MAX)[0];
             combinations[combination_index] = EdgeData(i, j, weight);
             combination_index++;
         }

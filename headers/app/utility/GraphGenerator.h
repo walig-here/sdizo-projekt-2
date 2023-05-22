@@ -53,14 +53,8 @@ class GraphGenerator{
      * 
      * @param vertitices ilość wierzchołków
      * @param directed czy wierzchołki mają być skierowane
+     * @param not_negative czy krawędzie mogą mieć wyłącznie nieujemne wagi?
      */
-    private: static vector<EdgeData> getAllPossibleEdges(int verticies, bool directed, int max_egde_count);
-
-
-    /**
-     * @brief 
-     * Zwraca silnię z zadanej nieujemnej liczby całkowitej.
-     */
-    private: static long long factorial(int n);
+    private: static vector<EdgeData> getAllPossibleEdges(int verticies, bool directed, int max_egde_count, bool not_negative);
 
 };

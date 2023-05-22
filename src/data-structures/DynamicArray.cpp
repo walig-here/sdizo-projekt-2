@@ -254,7 +254,7 @@ template<> int DynamicArray<VertexData>::min(){
     index++;
     for(; index < getLength(); index++){
         if(array_address[index].processed) continue;
-        if(array_address[minimum_index].weight <= array_address[index].weight) continue;
+        if(array_address[minimum_index].value <= array_address[index].value) continue;
 
         minimum_index = index;
     }

@@ -4,8 +4,43 @@
 class MSTResult;
 class PathfindingResult;
 
-
 #define NO_CONNECTION -2147483648       // oznaczenie braku połączenia między wierzchołkami
+#define INFINITY_W 2147483647               // waga krawędzi równa nieskończoność
+#define NULL_VERTEX -2147483648             // oznacza wierchołek NULL
+
+
+/**
+ * @brief 
+ * Element tablicy obrazującej stan wierzchołka wewnątrz zaimplementowanych algorytmów.
+ * Dla każdego algorytmu interpretacja pól struktury może się różnić.
+ * 
+ * @details
+ * Algorytmy Prima i Dijkstry:
+ * value        ->  waga przypisana do wierzchołka
+ * predecessor  ->  wierzchołek poprzedzający
+ * processed    ->  stan rozważania wierzchołka
+ * 
+ * 
+ * Algorytm Bellmana-Forda:
+ * value        -> waga przypisana do wierzchołka
+ * predecessor  -> wierzchołek poprzedzający
+ * processed    -> pole nieużywane w algorytmie
+ * 
+ * 
+ * Algorytm Kruskala:
+ * value        -> identyfikator poddrzewa, do którego należy wierzchołek
+ * predecessor  -> pole nieużywane w algorytmie
+ * processed    -> pole nieużywane w algorytmie
+ */
+struct VertexData{
+
+    /* POLA */
+    int value = INFINITY_W;             
+    int predecessor = NULL_VERTEX;      
+    bool processed = false;             
+
+};
+
 
 /**
  * @brief 

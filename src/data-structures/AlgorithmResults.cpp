@@ -11,11 +11,11 @@ MSTResult::MSTResult(DynamicArray<VertexData>& prim_array){
         if(prim_array[i]->predecessor == NULL_VERTEX) continue;
 
         // wczytuję krawędź
-        mst += prim_array[i]->weight;
+        mst += prim_array[i]->value;
         edges.push_back(EdgeData(
             min(prim_array[i]->predecessor, i),
             max(prim_array[i]->predecessor, i),
-            prim_array[i]->weight
+            prim_array[i]->value
         ));
 
     }
@@ -45,7 +45,7 @@ Path::Path(DynamicArray<VertexData>& dijkstra_array, unsigned start, unsigned en
     // Biorę wierzchołki od końca do początku ścieżki. Jeżeli dotrzemy do NULL_VERTEX, to oznacza,
     // że udało się przejść całą ścieżkę.
     int vertex = end;
-    distance = dijkstra_array[vertex]->weight;
+    distance = dijkstra_array[vertex]->value;
     if(distance == INFINITY_W) return;
     while (vertex != NULL_VERTEX){
         path.insert(path.begin(), vertex);

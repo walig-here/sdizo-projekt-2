@@ -96,7 +96,7 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
     if(start >= prim_array.getLength()) return MSTResult(prim_array);
 
     // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
-    prim_array[start]->weight = 0;
+    prim_array[start]->value = 0;
 
     // Wybieram z tablicy stanów wierzchołków kolejne nierozważone wierzchołki o minimalnej wadze
     // Jeżeli wszystkie wierzchołki są rozpatrzone, to algorytm może się zakończyć
@@ -106,7 +106,7 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
         
         // Jeżeli wybrany, minimalny wierzchołek ma wagę nieskończoność, to graf jest niespójny.
         // Wówczas algorytm nie może zostać poprawnie wykonany
-        if(prim_array[minimum_vertex_index]->weight == INFINITY_W){
+        if(prim_array[minimum_vertex_index]->value == INFINITY_W){
             DynamicArray<VertexData> empty_array(matrix->getDegree(), VertexData());
             return MSTResult(empty_array);
         }
@@ -119,9 +119,9 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
             neighbour_weight = *(matrix->get(minimum_vertex_index, i));
             if(neighbour_weight == NO_CONNECTION) continue;
             if(prim_array[i]->processed) continue;
-            if(prim_array[i]->weight <= neighbour_weight) continue;
+            if(prim_array[i]->value <= neighbour_weight) continue;
 
-            prim_array[i]->weight = neighbour_weight;
+            prim_array[i]->value = neighbour_weight;
             prim_array[i]->predecessor = minimum_vertex_index;
         }
 
@@ -147,7 +147,7 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
     if(start >= dijkstra_array.getLength()) return PathfindingResult(dijkstra_array, start);
 
     // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
-    dijkstra_array[start]->weight = 0;
+    dijkstra_array[start]->value = 0;
 
     // Wybieram z tablicy stanów wierzchołków kolejne nierozważone wierzchołki o minimalnej wadze
     // Jeżeli wszystkie wierzchołki są rozpatrzone, to algorytm może się zakończyć
@@ -157,7 +157,7 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
         
         // Jeżeli minimalnym wierzchołkiem jest ten o wadze nieskończoność, to nie da się do
         // niego dotrzeć z wierzchołkach starowego. W takiej styuacji tego wierzchołka nie rozważamy.
-        if(dijkstra_array[minimum_vertex_index]->weight == INFINITY_W) {
+        if(dijkstra_array[minimum_vertex_index]->value == INFINITY_W) {
             dijkstra_array[minimum_vertex_index]->processed = true;
             continue;
         }
@@ -167,10 +167,10 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
         // poprzednikiem sąsiada jest aktualny wierzchołek, a drogą do sąsiada jest ta, biegnąca przez rozważany wierzchołek.
         for(int i = 0; i < matrix->getDegree(); i++){
             if(*(matrix->get(minimum_vertex_index, i)) == NO_CONNECTION) continue;
-            path_thourgh_current_vertex = *(matrix->get(minimum_vertex_index, i)) + dijkstra_array[minimum_vertex_index]->weight;
-            if(dijkstra_array[i]->weight <= path_thourgh_current_vertex) continue;
+            path_thourgh_current_vertex = *(matrix->get(minimum_vertex_index, i)) + dijkstra_array[minimum_vertex_index]->value;
+            if(dijkstra_array[i]->value <= path_thourgh_current_vertex) continue;
 
-            dijkstra_array[i]->weight = path_thourgh_current_vertex;
+            dijkstra_array[i]->value = path_thourgh_current_vertex;
             dijkstra_array[i]->predecessor = minimum_vertex_index;
         }
 
@@ -209,7 +209,7 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
     if(start >= bf_array.getLength()) return PathfindingResult(bf_array, start);
 
     // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
-    bf_array[start]->weight = 0;
+    bf_array[start]->value = 0;
 
     // Pobieram tablicę krawędzi grafu
     DynamicArray<EdgeData> edges = getEdgesList(true);
@@ -226,11 +226,11 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
         better_path_found = false;
         for(int edge_index = 0; edge_index < edges.getLength(); edge_index++){
             edge = edges[edge_index];
-            if(bf_array[edge->begin]->weight == INFINITY_W) continue;
-            if(bf_array[edge->end]->weight <= edge->weigth + bf_array[edge->begin]->weight) continue;
+            if(bf_array[edge->begin]->value == INFINITY_W) continue;
+            if(bf_array[edge->end]->value <= edge->weigth + bf_array[edge->begin]->value) continue;
 
             better_path_found = true;
-            bf_array[edge->end]->weight = edge->weigth + bf_array[edge->begin]->weight;
+            bf_array[edge->end]->value = edge->weigth + bf_array[edge->begin]->value;
             bf_array[edge->end]->predecessor = edge->begin;
         }
 
@@ -242,8 +242,8 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
     // Sprawdzam, czy nie wystąpił cykl ujemny
     for(int i = 0; i < edges.getLength(); i++){
         edge = edges[i];
-        if(bf_array[edge->begin]->weight == INFINITY_W) continue;
-        if(bf_array[edge->end]->weight <= edge->weigth + bf_array[edge->begin]->weight) continue;
+        if(bf_array[edge->begin]->value == INFINITY_W) continue;
+        if(bf_array[edge->end]->value <= edge->weigth + bf_array[edge->begin]->value) continue;
 
         DynamicArray<VertexData> empty_result(matrix->getDegree(), VertexData());
         return PathfindingResult(empty_result, start);
@@ -257,6 +257,12 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
 #include "app/utility/SortingMachine.h"
 MSTResult MatrixGraph::algorithmKruskal(){
 
+    // Jeżeli graf jest pusty, to nie ma sensu wykonywać na nim algorytmu
+    if(isNull()){
+        DynamicArray<EdgeData> empty_mst;
+        return empty_mst;
+    }
+
     // Inicjalizuję tablice wyjściową algorytmu, przechowujacą krawędzie MST.
     // Inicjalizuję także tablice z posortowanymi niemalejąco krawędziami grafu oraz tablicę z danymi o wierzchołkach.
     DynamicArray<EdgeData> mst_edges;
@@ -266,7 +272,7 @@ MSTResult MatrixGraph::algorithmKruskal(){
 
     // Każdy wierzchołek przypisuję do jego własnego poddrzewa
     for(int i = 0; i < verticies.getLength(); i++)
-        verticies[i]->predecessor = i;
+        verticies[i]->value = i;
 
     // Dla kolejnych krawędzi sprawdzam, czy ich oba wierzchołki należą do tych samych poddrzew. Jeżeli nie należą, to łączymy ich 
     // poddrzewa w jedno włączając poddrzewa wierzchołka końcowego w poddrzewo wierzchołka początkowego. W takim wypadku dopisujemy
@@ -275,20 +281,20 @@ MSTResult MatrixGraph::algorithmKruskal(){
     int previous_subtree_id;
     for(int i = 0; i < sorted_graph_edges.getLength(); i++){
         edge = sorted_graph_edges[i];
-        if(verticies[edge->begin]->predecessor == verticies[edge->end]->predecessor) continue;
+        if(verticies[edge->begin]->value == verticies[edge->end]->value) continue;
 
         mst_edges.push_back(*edge);
-        previous_subtree_id = verticies[edge->end]->predecessor;
+        previous_subtree_id = verticies[edge->end]->value;
         for(int j = 0; j < verticies.getLength(); j++)
-            if(verticies[j]->predecessor == previous_subtree_id)
-                verticies[j]->predecessor = verticies[edge->begin]->predecessor;
+            if(verticies[j]->value == previous_subtree_id)
+                verticies[j]->value = verticies[edge->begin]->value;
     }
 
     // Sprawdzam, czy graf okazał się spójny. Jeżeli jest, to w wyniku przebiegu algorytmu
     // wszytskie wierzchołki powinny znaleźć się w jednym poddrzewie
-    int result_tree_id = verticies[0]->predecessor;
+    int result_tree_id = verticies[0]->value;
     for(int i = 0; i < verticies.getLength(); i++){
-        if(verticies[i]->predecessor == result_tree_id) continue;
+        if(verticies[i]->value == result_tree_id) continue;
 
         DynamicArray<EdgeData> empty_mst;
         return empty_mst;
