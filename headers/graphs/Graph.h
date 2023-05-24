@@ -13,31 +13,23 @@ class PathfindingResult;
  * @brief 
  * Element tablicy obrazującej stan wierzchołka wewnątrz zaimplementowanych algorytmów.
  * Dla każdego algorytmu interpretacja pól struktury może się różnić.
- * 
- * @details
- * Algorytmy Prima i Dijkstry:
- * value        ->  waga przypisana do wierzchołka
- * predecessor  ->  wierzchołek poprzedzający
- * processed    ->  stan rozważania wierzchołka
- * 
- * 
- * Algorytm Bellmana-Forda:
- * value        -> waga przypisana do wierzchołka
- * predecessor  -> wierzchołek poprzedzający
- * processed    -> pole nieużywane w algorytmie
- * 
- * 
- * Algorytm Kruskala:
- * value        -> identyfikator poddrzewa, do którego należy wierzchołek
- * predecessor  -> pole nieużywane w algorytmie
- * processed    -> pole nieużywane w algorytmie
  */
 struct VertexData{
 
     /* POLA */
-    int value = INFINITY_W;             
-    int predecessor = NULL_VERTEX;      
-    bool processed = false;             
+    int vertex;           // indeks wierzchołka reprezentowanego przez strukturę
+    int weight;            // waga przypisana do wierzchołka             
+    int predecessor;      // indeks wierzchołka poprzedzającego  
+
+    /**
+     * @brief 
+     * Konstruktor.
+     */
+    VertexData(int vertex = NULL_VERTEX, int weight = INFINITY_W, int predecessor = NULL_VERTEX){
+        this->vertex = vertex;
+        this->weight = weight;
+        this->predecessor = predecessor;
+    }
 
 };
 

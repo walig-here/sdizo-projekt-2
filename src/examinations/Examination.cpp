@@ -34,10 +34,25 @@ Examination::Examination(){
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.99); p++;
 
+    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.99); p++;
+
     phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.99); p++;
 
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.50); p++;
@@ -60,10 +75,25 @@ Examination::Examination(){
     phase_graphs[p] = PhaseGraphData(LIST,      100,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(LIST,      100,    0.99); p++;
 
+    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.99); p++;
+
     phase_graphs[p] = PhaseGraphData(LIST,      250,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(LIST,      250,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(LIST,      250,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(LIST,      250,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.99); p++;
 
     phase_graphs[p] = PhaseGraphData(LIST,      500,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(LIST,      500,    0.50); p++;
@@ -95,7 +125,6 @@ bool Examination::saveResults(){
 
     if(!FileWriter::save(lines, final_output_file)){
         cout << "Nastapil blad przy zapisywaniu wynikow badania!" << endl;
-        Console::waitForUserResponse();
         return false;
     }
     cout << "Zapisano " << results.size() << " wynikow do pliku " << final_output_file << "!" << endl;

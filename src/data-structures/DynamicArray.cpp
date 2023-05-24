@@ -198,6 +198,20 @@ template<> void DynamicArray<EdgeData>::print(){
 
 }
 
+template<> void DynamicArray<VertexData>::print(){
+
+    printf("Zawartosc tablicy:\n");
+    if(length == 0) {
+        printf("pusta\n");
+        return;
+    }
+
+    for(int i = 0; i < length; i++) 
+        cout << "(" << array_address[i].vertex << " " << array_address[i].predecessor << " " << array_address[i].weight << ")" << ", ";
+    printf("\n");
+
+}
+
 template<typename T> void DynamicArray<T>::pop_back(){
 
     // Z pustej tablicy nie usuwam
@@ -225,6 +239,14 @@ template<> int* DynamicArray<int>::find(int value){
 
 }
 
+template<> VertexData* DynamicArray<VertexData>::find(VertexData vertex){
+
+    for(int i = 0; i < length; i++)
+        if(array_address[i].vertex == vertex.vertex) return array_address+i;
+    return nullptr;
+
+}
+
 template<typename T> T* DynamicArray<T>::operator[](unsigned index){
 
     if(this == nullptr) return nullptr;
@@ -235,29 +257,6 @@ template<typename T> T* DynamicArray<T>::operator[](unsigned index){
 
 template<> int DynamicArray<VertexData>::min(){
 
-    // Z pustej tablicy nie da się wyznaczyć minimum
-    if(array_address == nullptr) return -1;
-
-    // Znajdujemy pierwszy nierozważony wierzchołek
-    // Jeżeli wszystkie wierzchołki są rozpatrzone, to zwrócony zostanie nullptr, tablica nie ma minimum
-    int index = 0;
-    int minimum_index = -1;
-    for(; index < getLength(); index++){
-        if(array_address[index].processed) continue;
-
-        minimum_index = index;
-        break;
-    }
-    if(minimum_index == -1) return minimum_index;
-
-    // Porównując go resztą nierozważonych wierzchołków wybieramy minimum
-    index++;
-    for(; index < getLength(); index++){
-        if(array_address[index].processed) continue;
-        if(array_address[minimum_index].value <= array_address[index].value) continue;
-
-        minimum_index = index;
-    }
-    return minimum_index;
+    return -1;
 
 }

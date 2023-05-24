@@ -93,7 +93,7 @@ class Examination{
     private: Timer timer;                                       // narzędzie do pomiaru czasu
     private: vector<ExaminationRecord> results;                 // pula danych zebrana dotychczas podczas badań
     private: int8_t phase;                                      // aktualna faza badania
-    private: const static int8_t PHASE_COUNT = 40;              // łączna ilość faz badania
+    private: const static int8_t PHASE_COUNT = 64;              // łączna ilość faz badania
     private: static PhaseGraphData phase_graphs[PHASE_COUNT];   // dane na temat grafów badanych w poszczegółnych fazach
 
     /* METODY */

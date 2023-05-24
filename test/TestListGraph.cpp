@@ -264,11 +264,11 @@ TEST(Dijkstra, FiveVertexGraph){
 
     // Sprawdzenie
     vector<VertexData> verticies(5);
-    verticies[0].value = 16;           verticies[0].predecessor = 2;           verticies[0].processed = true;
-    verticies[1].value = 25;           verticies[1].predecessor = 3;           verticies[1].processed = true;
-    verticies[2].value = 11;           verticies[2].predecessor = 4;           verticies[2].processed = true;
-    verticies[3].value = 0;            verticies[3].predecessor = NULL_VERTEX; verticies[3].processed = true;
-    verticies[4].value = 10;           verticies[4].predecessor = 3;           verticies[4].processed = true;
+    verticies[0].weight = 16;           verticies[0].predecessor = 2;           
+    verticies[1].weight = 25;           verticies[1].predecessor = 3;          
+    verticies[2].weight = 11;           verticies[2].predecessor = 4;           
+    verticies[3].weight = 0;            verticies[3].predecessor = NULL_VERTEX; 
+    verticies[4].weight = 10;           verticies[4].predecessor = 3;           
     DynamicArray<VertexData> dijkstra_array(verticies); 
     PathfindingResult proper_result(dijkstra_array, start);
 
@@ -386,10 +386,10 @@ TEST(BellmanFord, FiveVertexGraph){
 
     // Sprawdzenie
     vector<VertexData> verticies(5);
-    verticies[0].value = -1;           verticies[0].predecessor = 2;           
-    verticies[1].value = 9;            verticies[1].predecessor = 0;           
-    verticies[2].value = 0;            verticies[2].predecessor = NULL_VERTEX;           
-    verticies[3].value = 8;            verticies[3].predecessor = 1;      
+    verticies[0].weight = -1;           verticies[0].predecessor = 2;           
+    verticies[1].weight = 9;            verticies[1].predecessor = 0;           
+    verticies[2].weight = 0;            verticies[2].predecessor = NULL_VERTEX;           
+    verticies[3].weight = 8;            verticies[3].predecessor = 1;      
     DynamicArray<VertexData> bf_array(verticies); 
     PathfindingResult proper_result(bf_array, start);
 
