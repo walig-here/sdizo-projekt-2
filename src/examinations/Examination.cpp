@@ -19,86 +19,106 @@ Examination::Examination(){
     int8_t p = 0;
 
                         /* ### macierzowe ### */
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,     0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,     0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,     0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,     0.99); p++;
-
-    phase_graphs[p] = PhaseGraphData(MATRIX,    50,     0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    50,     0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    50,     0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    50,     0.99); p++;
-
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    150,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    200,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    200,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    200,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    200,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    250,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    300,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    300,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    300,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    300,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    350,    0.99); p++;
-
-    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    450,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    400,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    400,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    400,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    400,    0.99); p++;
 
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.75); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.99); p++;
 
+    phase_graphs[p] = PhaseGraphData(MATRIX,    600,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    600,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    600,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    600,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,    700,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    700,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    700,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    700,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,    800,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    800,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    800,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    800,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,    900,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    900,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    900,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,    900,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(MATRIX,   1000,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,   1000,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,   1000,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(MATRIX,   1000,    0.99); p++;
+
                         /* ### listowe ### */
-    phase_graphs[p] = PhaseGraphData(LIST,      10,     0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      10,     0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      10,     0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      10,     0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    100,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    100,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    100,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    100,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      50,     0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      50,     0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      50,     0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      50,     0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    200,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    200,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    200,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    200,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      100,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      100,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      100,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      100,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    300,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    300,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    300,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    300,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      150,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    400,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    400,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    400,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    400,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      250,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      250,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      250,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      250,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    500,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    500,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    500,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    500,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      450,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    600,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    600,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    600,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    600,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      350,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    700,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    700,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    700,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    700,    0.99); p++;
 
-    phase_graphs[p] = PhaseGraphData(LIST,      500,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      500,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      500,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,      500,    0.99); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    800,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    800,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    800,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    800,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(LIST,    900,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    900,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    900,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,    900,    0.99); p++;
+
+    phase_graphs[p] = PhaseGraphData(LIST,   1000,    0.25); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,   1000,    0.50); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,   1000,    0.75); p++;
+    phase_graphs[p] = PhaseGraphData(LIST,   1000,    0.99); p++;
 
 }
 
@@ -196,7 +216,7 @@ void Examination::examineAlgorithm(){
     menu.addOption(DIJKSTRA, "Algorytm Dijkstry");
     menu.addOption(BELLMAN_FORD, "Algorytm Bellmana-Forda");
     int user_choice = menu.getUserChoice();
-    if(user_choice > BELLMAN_FORD) {
+    if(user_choice > BELLMAN_FORD && user_choice < 0) {
         cout << "Wybrano niepoprawna opcje!" << endl;
         Console::waitForUserResponse();
         return;
@@ -240,7 +260,7 @@ void Examination::examineBellmanFord(){
     generateGraph(true, false);
 
     // Losowanie wierzchołka początkowego
-    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount())[0];
+    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount()-1)[0];
 
     // Pomiar
     timer.start();
@@ -264,7 +284,7 @@ void Examination::examineDijkstra(){
     generateGraph(true, true);
 
     // Losowanie wierzchołka początkowego
-    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount())[0];
+    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount()-1)[0];
 
     // Pomiar
     timer.start();
@@ -288,7 +308,7 @@ void Examination::examinePrim(){
     generateGraph(false, false);
 
     // Losowanie wierzchołka początkowego
-    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount())[0];
+    int start = RandomNumberGenerator::getIntegers(1, 0, graph->verticiesCount()-1)[0];
 
     // Pomiar
     timer.start();

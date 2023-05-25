@@ -97,10 +97,10 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
     }
 
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
-    DynamicArray<EdgeData> mst_edges(matrix->getDegree()-1, EdgeData());    // krawędzie składające się na MST
-    int edges_already_added = 0;                                            // liczba dotychczas wyznaczonych krawędzi MST
-    DynamicArray<int> vertex_status(matrix->getDegree(), 0);                // tablica zawierająca stan wierzchołka
-    Heap queue(matrix->getDegree());                                        // kolejka priorytetowa
+    DynamicArray<EdgeData> mst_edges(matrix->getDegree()-1, EdgeData());            // krawędzie składające się na MST
+    int edges_already_added = 0;                                                    // liczba dotychczas wyznaczonych krawędzi MST
+    DynamicArray<int> vertex_status(matrix->getDegree(), 0);                        // tablica zawierająca stan wierzchołka
+    Heap queue(matrix->getDegree()*matrix->getDegree()/2 - matrix->getDegree()/2);  // kolejka priorytetowa
 
 
     // Wprowadzam wierzchołek startowy z wagą 0 i poprzenikiem NULL do kolejki
@@ -109,11 +109,14 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
     // Algorytm kończy się, gdy drzewo zawiera wsystkie wierzchołki, czyli gdy |E| = |V|-1
     VertexData current_vertex;         // rozważany wierzchołek
     VertexData* neighbour;              // sąsiad rozważanego wierzchołka
-    while ( edges_already_added != matrix->getDegree()-1){
+    while ( edges_already_added != matrix->getDegree()-1 && queue.root() != nullptr){
         
         // Ściągam wierzchołek o minimalnej wadze z głowy kolejki
         current_vertex = *queue.root();
         queue.pop_root();
+
+        // Jeżeli ten wierzchołek był już rozpatrzony to go pomijam
+        if(*vertex_status[current_vertex.vertex] == 1) continue;
 
         // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako rozważeni
         for(int i = 0; i < matrix->getDegree(); i++){

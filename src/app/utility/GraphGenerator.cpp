@@ -17,9 +17,10 @@ Graph* GraphGenerator::generateGraph(GraphRepresentations representation, int si
     vector<EdgeData> edges = getRandomEdges(size, max_edge_count * density , max_edge_count, directed, not_negative);
 
     // Tworzony jest graf w odpowiedniej reprezentacji
-    if(representation == LIST) return new ListGraph(size, edges, directed);  
-    else if (representation == MATRIX) return new MatrixGraph(size, edges, directed);
-    return nullptr;
+    Graph* graph = nullptr;
+    if(representation == LIST) graph = new ListGraph(size, edges, directed);  
+    else if (representation == MATRIX) graph = new MatrixGraph(size, edges, directed);
+    return graph;
 
 }
 

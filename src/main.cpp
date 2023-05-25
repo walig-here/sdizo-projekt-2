@@ -25,32 +25,10 @@ enum mainMenuOptions{
  */
 void generateGraph();
 
-#include "data-structures/Heap.h"
-void test(){
-    // Inicjalizacja grafu
-    vector<EdgeData> edges = {
-        EdgeData(1, 2, 10),
-        EdgeData(1, 0, 3),
-        EdgeData(2, 0, 15),
-        EdgeData(2, 4, 16),
-        EdgeData(0, 3, 3),
-        EdgeData(0, 4, 7),
-        EdgeData(3, 4, 13)
-    };
-    unsigned verticies = 5;
-    MatrixGraph graph(verticies, edges, false);
-
-    // Wykonanie algorytmu
-    MSTResult result = graph.algorithmKruskal();
-}
-
 /**
  * @brief Główna pętla aplikacji.
  */
 int main(int argc, char const *argv[]){
-
-    test();
-    return 0;
 
     // Ustalenie opcji w menu głównym
     Menu main_menu("MENU GLOWNE:");

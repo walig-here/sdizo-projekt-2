@@ -70,22 +70,11 @@ void PathModule::algorithmBellmanFord(){
         Console::waitForUserResponse();
         return;
     }
-
-    // Pobieram wierzchołek początkowy
-    unsigned start;
-    try{
-        start = Console::getIntInput("Podaj wierzcholek startowy:");
-    }catch(const std::exception& e){
-        std::cerr << e.what() << '\n';
-        Console::waitForUserResponse();
-        delete graph; graph = nullptr;
-        return;
-    }
     
 
     // Wykonuję algorytm Belmanna-Forda dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego
-    PathfindingResult result = graph->algorithmBellmanFord(start);
+    PathfindingResult result = graph->algorithmBellmanFord(begin);
     if(result.isEmpty()) cout << "Graf zawiera ujemny cykl!" << endl;
     else result.print();
     Console::waitForUserResponse();
@@ -111,24 +100,18 @@ void PathModule::algorithmDijkstra(){
         Console::waitForUserResponse();
         return;
     }
-
-    // Pobieram wierzchołek początkowy
-    unsigned start;
-    try{
-        start = Console::getIntInput("Podaj wierzcholek startowy:");
-    }catch(const std::exception& e){
-        std::cerr << e.what() << '\n';
+    
+    // Jeżeli graf zawiera ujemne krawędzie, to nie wykonuję algorytmu
+    if(graph->containNegativeEdges()){
+        cout << "Graf zawiera ujemne krawedzie!" << endl;
         Console::waitForUserResponse();
-        delete graph; graph = nullptr;
         return;
     }
-    
 
     // Wykonuję algorytm Dijkstry dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego
-    PathfindingResult result = graph->algorithmDijkstra(start);
-    if(result.isEmpty()) cout << "Graf zawiera ujemne krawedzie!" << endl;
-    else result.print();
+    PathfindingResult result = graph->algorithmDijkstra(this->begin);
+    result.print();
     Console::waitForUserResponse();
 
     // Zwolnienie instancji grafu

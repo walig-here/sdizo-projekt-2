@@ -97,9 +97,9 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
 
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
     DynamicArray<EdgeData> mst_edges(verticies_count-1, EdgeData());    // krawędzie składające się na MST
-    int edges_already_added = 0;                                            // liczba dotychczas wyznaczonych krawędzi MST
+    int edges_already_added = 0;                                        // liczba dotychczas wyznaczonych krawędzi MST
     DynamicArray<int> vertex_status(verticies_count, 0);                // tablica zawierająca stan wierzchołka
-    Heap queue(verticies_count);                                        // kolejka priorytetowa
+    Heap queue(verticies_count*verticies_count/2+verticies_count/2);    // kolejka priorytetowa
 
 
     // Wprowadzam wierzchołek startowy z wagą 0 i poprzenikiem NULL do kolejki
@@ -108,11 +108,14 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
     // Algorytm kończy się, gdy drzewo zawiera wsystkie wierzchołki, czyli gdy |E| = |V|-1
     VertexData current_vertex;         // rozważany wierzchołek
     VertexData* neighbour;              // sąsiad rozważanego wierzchołka
-    while ( edges_already_added != verticies_count-1){
+    while ( edges_already_added != verticies_count-1 && queue.root() != nullptr){
         
         // Ściągam wierzchołek o minimalnej wadze z głowy kolejki
         current_vertex = *queue.root();
         queue.pop_root();
+
+        // Jeżeli ten wierzchołek był już rozpatrzony to go pomijam
+        if(*vertex_status[current_vertex.vertex] == 1) continue;
 
         // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako rozważeni
         for(int i = 0; adjentency_lists[current_vertex.vertex][i] != nullptr; i++){
