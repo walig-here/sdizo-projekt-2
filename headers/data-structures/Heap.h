@@ -132,7 +132,7 @@ class Heap{
     // Parametry:
     // node_index - indeks elementu, od którego ma rozpocząć się naprawa
     //-----------------------------------------------------------------------
-    private: void repairUpwards(unsigned node_index);
+    public: void repairUpwards(unsigned node_index);
 
 
     //-----------------------------------------------------------------------

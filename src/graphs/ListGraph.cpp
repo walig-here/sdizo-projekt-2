@@ -91,8 +91,8 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
 
     // Sprawdzam, czy graf nie jest pusty
     if(isNull()) {
-        DynamicArray<VertexData> empty_result(verticies_count, VertexData());
-        return empty_result;
+        DynamicArray<EdgeData> empty_result;
+        return MSTResult(empty_result);
     }
 
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
@@ -157,7 +157,7 @@ PathfindingResult ListGraph::algorithmDijkstra(unsigned start){
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
     DynamicArray<VertexData> result(verticies_count, VertexData());     // tablica zawierająca wynik
     DynamicArray<int> vertex_status(verticies_count, 0);                // tablica zawierająca stan wierzchołka
-    Heap queue(verticies_count);                                        // kolejka priorytetowa
+    Heap queue(verticies_count*verticies_count);                        // kolejka priorytetowa
 
 
     // Wprowadzam wierzchołek startowy z wagą 0 i poprzenikiem NULL do kolejki
@@ -172,29 +172,24 @@ PathfindingResult ListGraph::algorithmDijkstra(unsigned start){
         current_vertex = *queue.root();
         queue.pop_root();
 
+        // Jeżeli wierzchołek był już odwiedzony, to pomijamy jego rozważenie
+        if(*vertex_status[current_vertex.vertex] == 1) continue;
+
         // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako odwiedzeni
         for(int i = 0; adjentency_lists[current_vertex.vertex][i] != nullptr; i++){
             if(*vertex_status[adjentency_lists[current_vertex.vertex][i]->end] == 1) continue;
 
-            // Sprawdzam, czy sąsiad znajduje się już w kolejkce. Jeżeli nie, to dodajemy go do niej
-            // przypisując mu wagę ścieżli prowadzącej do niego i przechodzącej przez rozważany wierzchołek 
-            // oraz poprzednikiem w postaci rozważanego wierzchołka.
-            neighbour = queue.find(adjentency_lists[current_vertex.vertex][i]->end);
-            if(neighbour == nullptr){
-                queue.add(VertexData(
+            // W ramach optymalizacji pomijam sprawdzenie, czy sąsiad znajduje się juz w kolejce.
+            // Zamiast tradycyjnej relaksacji po prostu dodaję dane o dordzę prowadzącej do sąsiada od
+            // aktualnego wierzchołka. Kolejka sama umieści go w odpowiednim miejscu, co spowoduje, że
+            // ta kopie wierzchołka o najmniejszej wadze zostanie pobrana pobrana z kolejki przed kopiami
+            // o większych wagach. Następnie wierzchołek zostanie oznaczony jako odwiedzony, co spodowuje, że
+            // owe gorsze pod względem wagowym kopie nie zostaną rozważone.
+            queue.add(VertexData(
                     adjentency_lists[current_vertex.vertex][i]->end, 
                     adjentency_lists[current_vertex.vertex][i]->weigth + current_vertex.weight, 
                     current_vertex.vertex
-                ));
-                continue;
-            }
-
-            // Jeżeli sąsiad jest już w kolejce, to sprawdzam, czy droga przez rozważany wierzchołek 
-            // jest mniejsza niż waga obecnie mu przypisana. Jeżeli tak, to przypisujemy sąsiadowi 
-            // wagę tej drogi i uznajemy rozważany wierzchołek za jego poprzednika. 
-            if(adjentency_lists[current_vertex.vertex][i]->weigth + current_vertex.weight >= neighbour->weight) continue;
-            neighbour->weight = adjentency_lists[current_vertex.vertex][i]->weigth + current_vertex.weight;
-            neighbour->predecessor = current_vertex.vertex;
+            ));
         }
 
         // Zapisuje przypisane wierzchołkowi wartości do tablicy wynikowej i uznaje go za odwiedzonego
@@ -211,17 +206,33 @@ PathfindingResult ListGraph::algorithmDijkstra(unsigned start){
 DynamicArray<EdgeData> ListGraph::getEdgesList(bool directional){
 
     // towrzę tablicę krawędzi
-    DynamicArray<EdgeData> edges;
+    int edge_count;
+    if(directional) edge_count = verticies_count*verticies_count;
+    else edge_count = verticies_count*verticies_count/2 - verticies_count/2;
+    DynamicArray<EdgeData> edges(edge_count, EdgeData());
 
     // zbieram wszystkie krawędzie 
+    int current_edge = 0;
     for(int vertex = 0; vertex < verticies_count; vertex++){
-        for(int i = 0; adjentency_lists[vertex][i] != nullptr; i++)
-            if(!(!directional && adjentency_lists[vertex][i]->end <= vertex))
-                edges.push_back(EdgeData(vertex, adjentency_lists[vertex][i]->end, adjentency_lists[vertex][i]->weigth));
+        for(int i = 0; adjentency_lists[vertex][i] != nullptr; i++){
+            if(!directional && adjentency_lists[vertex][i]->end <= vertex) continue;
+
+            edges[current_edge]->begin = vertex;
+            edges[current_edge]->end = adjentency_lists[vertex][i]->end;
+            edges[current_edge]->weigth = adjentency_lists[vertex][i]->weigth;
+            current_edge++;
+        }
     }
     
-    // zwracam wynik 
-    return edges;
+    // Niekoniecznie graf ma maksymalną liczbę krawędzi, więc zwaracam tablicę o takiej
+    // wielkości, jaka była rzeczywista ilość krawędzi
+    DynamicArray<EdgeData> properly_sized_edges(current_edge, EdgeData());
+    for(int i = 0; i < properly_sized_edges.getLength(); i++){
+        properly_sized_edges[i]->begin = edges[i]->begin;
+        properly_sized_edges[i]->end = edges[i]->end;
+        properly_sized_edges[i]->weigth = edges[i]->weigth;
+    }
+    return properly_sized_edges;
 
 }
 
@@ -248,8 +259,8 @@ PathfindingResult ListGraph::algorithmBellmanFord(unsigned start){
         // Jeżeli w iteracji |V|-1 poprawił się jakiś cykl i znajeźliśmy się w iteracji |V|-tej, to 
         // oznacza to istnienie cyklu ujemnego w grafie
         if(i == verticies_count){
-            DynamicArray<VertexData> empty_result(verticies_count, VertexData());
-            return PathfindingResult(bf_array, start);
+            DynamicArray<VertexData> empty_result;
+            return PathfindingResult(empty_result, start);
         }
 
         // Sprawdzam kolejne krawędzie. Jeżeli do wierzchołek końcowy ma większą wagę niż suma wag wierzchołka końcowego i łączących
@@ -277,6 +288,8 @@ PathfindingResult ListGraph::algorithmBellmanFord(unsigned start){
 }
 
 #include "app/utility/SortingMachine.h"
+#include "data-structures/DisjointSet.h"
+#include "app/utility/Timer.h"
 MSTResult ListGraph::algorithmKruskal(){
     
     // Jeżeli graf jest pusty, to nie ma sensu wykonywać algorytmu
@@ -287,36 +300,33 @@ MSTResult ListGraph::algorithmKruskal(){
 
     // Inicjalizuje struktury danych niezbędne do wykonania algorytmu
     DynamicArray<EdgeData> mst_edges(verticies_count-1, EdgeData());    // zbiór krawędzi mst
-    unsigned mst_edges_already_added = 0;                                   // liczba już wyznaczonych krawędzi MST
-    DynamicArray<EdgeData> graph_edges = getEdgesList(false);               // zbiór krawędzi grafu
-    DynamicArray<int> subtrees(verticies_count, 0);                     // tablica przechowująca dane o przynależności wierzchołków do poddrzew                       
+    unsigned mst_edges_already_added = 0;                               // liczba już wyznaczonych krawędzi MST
+    DynamicArray<EdgeData> graph_edges = getEdgesList(false);           // zbiór krawędzi grafu
+    DisjointSets subtrees(verticies_count);                             // dane o przynależności wierzchołków do poddrzew                
 
     // Sortowanie listy krawędzi
     SortingMachine::sort(graph_edges, 0, graph_edges.getLength()-1);
-
-    // Każdy wierzchołek umieszczam w osobnym poddrzewie
-    for(int i = 0; i < subtrees.getLength(); i++)
-        *subtrees[i] = i;
     
     // Sprawdzam kolejne krawędzie z posortowanej tablicy do dojścia do jej końca lub wyznaczenie wszystkich krawędzi MST
     EdgeData* edge;
-    int previous_subtree_id;
+    int end_subtree, being_subtree;
     for(int i = 0; mst_edges_already_added != verticies_count-1 && i < graph_edges.getLength(); i++){
 
         // Pobieram krawędź
         edge = graph_edges[i];
 
+        // Sprawdzam do jakich poddrzew należą krańce krawędzi
+        end_subtree = subtrees.getSet(edge->end);
+        being_subtree = subtrees.getSet(edge->begin);
+
         // Jeżeli wierzchołek początkowy i końcowy krawędzi nie są w tym samym poddrzewie, to dodaję krawędź do MST.
         // Następnie łącze ich poddrzewa, włączając poddrzewo wierzchołka końcowego w poddrzewo wierzchołka początkowego.
-        if(*subtrees[edge->begin] == *subtrees[edge->end]) continue;    
+        if(end_subtree == being_subtree) continue;    
 
         *mst_edges[mst_edges_already_added] = *edge;
         mst_edges_already_added++;
 
-        previous_subtree_id = *subtrees[edge->end];
-        for(int j = 0; j < subtrees.getLength(); j++)
-            if(*subtrees[j] == previous_subtree_id)
-                *subtrees[j] = *subtrees[edge->begin];
+        subtrees.unionSets(end_subtree, being_subtree);
 
     }
 

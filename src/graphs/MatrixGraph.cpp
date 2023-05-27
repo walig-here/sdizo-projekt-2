@@ -92,8 +92,8 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
 
     // Sprawdzam, czy graf nie jest pusty
     if(isNull()) {
-        DynamicArray<VertexData> empty_result(matrix->getDegree(), VertexData());
-        return empty_result;
+        DynamicArray<EdgeData> empty_result;
+        return MSTResult(empty_result);
     }
 
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
@@ -157,9 +157,9 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
     }
 
     // Inicjalizuje struktury niezbędne do wykonania algorytmu
-    DynamicArray<VertexData> result(matrix->getDegree(), VertexData());     // tablica zawierająca wynik
-    DynamicArray<int> vertex_status(matrix->getDegree(), 0);                // tablica zawierająca stan wierzchołka
-    Heap queue(matrix->getDegree());                                        // kolejka priorytetowa
+    DynamicArray<VertexData> result(matrix->getDegree(), VertexData());             // tablica zawierająca wynik
+    DynamicArray<int> vertex_status(matrix->getDegree(), 0);                        // tablica zawierająca stan wierzchołka
+    Heap queue(matrix->getDegree()*matrix->getDegree());                            // kolejka priorytetowa
 
 
     // Wprowadzam wierzchołek startowy z wagą 0 i poprzenikiem NULL do kolejki
@@ -174,30 +174,25 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
         current_vertex = *queue.root();
         queue.pop_root();
 
+        // Jeżeli wierzchołek był już odwiedzony, to pomijamy jego rozważenie
+        if(*vertex_status[current_vertex.vertex] == 1) continue;
+
         // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako odwiedzeni
         for(int i = 0; i < matrix->getDegree(); i++){
             if(*matrix->get(current_vertex.vertex, i) == NO_CONNECTION) continue;
             if(*vertex_status[i] == 1) continue;
 
-            // Sprawdzam, czy sąsiad znajduje się już w kolejkce. Jeżeli nie, to dodajemy go do niej
-            // przypisując mu wagę ścieżli prowadzącej do niego i przechodzącej przez rozważany wierzchołek 
-            // oraz poprzednikiem w postaci rozważanego wierzchołka.
-            neighbour = queue.find(i);
-            if(neighbour == nullptr){
-                queue.add(VertexData(
+            // W ramach optymalizacji pomijam sprawdzenie, czy sąsiad znajduje się juz w kolejce.
+            // Zamiast tradycyjnej relaksacji po prostu dodaję dane o dordzę prowadzącej do sąsiada od
+            // aktualnego wierzchołka. Kolejka sama umieści go w odpowiednim miejscu, co spowoduje, że
+            // ta kopie wierzchołka o najmniejszej wadze zostanie pobrana pobrana z kolejki przed kopiami
+            // o większych wagach. Następnie wierzchołek zostanie oznaczony jako odwiedzony, co spodowuje, że
+            // owe gorsze pod względem wagowym kopie nie zostaną rozważone.
+            queue.add(VertexData(
                     i, 
                     *matrix->get(current_vertex.vertex, i) + current_vertex.weight, 
                     current_vertex.vertex
-                ));
-                continue;
-            }
-
-            // Jeżeli sąsiad jest już w kolejce, to sprawdzam, czy droga przez rozważany wierzchołek 
-            // jest mniejsza niż waga obecnie mu przypisana. Jeżeli tak, to przypisujemy sąsiadowi 
-            // wagę tej drogi i uznajemy rozważany wierzchołek za jego poprzednika. 
-            if(*matrix->get(current_vertex.vertex, i) + current_vertex.weight >= neighbour->weight) continue;
-            neighbour->weight = *matrix->get(current_vertex.vertex, i) + current_vertex.weight;
-            neighbour->predecessor = current_vertex.vertex;
+            ));
         }
 
         // Zapisuje przypisane wierzchołkowi wartości do tablicy wynikowej i uznaje go za odwiedzonego
@@ -214,16 +209,33 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
 DynamicArray<EdgeData> MatrixGraph::getEdgesList(bool directional){
 
     // towrzę tablicę krawędzi
-    DynamicArray<EdgeData> edges;
+    int edge_count;
+    if(directional) edge_count = matrix->getDegree()*matrix->getDegree();
+    else edge_count = matrix->getDegree()*matrix->getDegree()/2 - matrix->getDegree()/2;
+    DynamicArray<EdgeData> edges(edge_count, EdgeData());
 
     // zbieram wszystkie krawędzie 
-    for(int vertex = 0; vertex < matrix->getDegree(); vertex++)
-        for(int neighbour =  ( !directional ? vertex+1 : 0 ); neighbour < matrix->getDegree(); neighbour++)
-            if(*(matrix->get(vertex, neighbour)) != NO_CONNECTION)
-                edges.push_back(EdgeData(vertex, neighbour, *(matrix->get(vertex, neighbour))));
-    
-    // zwracam wynik 
-    return edges;
+    int current_edge = 0;
+    for(int vertex = 0; vertex < matrix->getDegree() && current_edge < edge_count; vertex++){
+        for(int neighbour =  ( !directional ? vertex+1 : 0 ); neighbour < matrix->getDegree() && current_edge < edge_count; neighbour++){
+            if(*(matrix->get(vertex, neighbour)) == NO_CONNECTION) continue;
+
+            edges[current_edge]->begin = vertex;
+            edges[current_edge]->end = neighbour;
+            edges[current_edge]->weigth = *(matrix->get(vertex, neighbour));
+            current_edge++;
+        }
+    }
+
+    // Niekoniecznie graf ma maksymalną liczbę krawędzi, więc zwaracam tablicę o takiej
+    // wielkości, jaka była rzeczywista ilość krawędzi
+    DynamicArray<EdgeData> properly_sized_edges(current_edge, EdgeData());
+    for(int i = 0; i < properly_sized_edges.getLength(); i++){
+        properly_sized_edges[i]->begin = edges[i]->begin;
+        properly_sized_edges[i]->end = edges[i]->end;
+        properly_sized_edges[i]->weigth = edges[i]->weigth;
+    }
+    return properly_sized_edges;
 
 }
 
@@ -251,8 +263,8 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
         // Jeżeli w iteracji |V|-1 poprawił się jakiś cykl i znajeźliśmy się w iteracji |V|-tej, to 
         // oznacza to istnienie cyklu ujemnego w grafie
         if(i == matrix->getDegree()){
-            DynamicArray<VertexData> empty_result(matrix->getDegree(), VertexData());
-            return PathfindingResult(bf_array, start);
+            DynamicArray<VertexData> empty_result;
+            return PathfindingResult(empty_result, start);
         }
 
         // Sprawdzam kolejne krawędzie. Jeżeli do wierzchołek końcowy ma większą wagę niż suma wag wierzchołka końcowego i łączących
@@ -280,6 +292,8 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
 }
 
 #include "app/utility/SortingMachine.h"
+#include "data-structures/DisjointSet.h"
+#include "app/utility/Timer.h"
 MSTResult MatrixGraph::algorithmKruskal(){
 
     // Jeżeli graf jest pusty, to nie ma sensu wykonywać algorytmu
@@ -292,34 +306,31 @@ MSTResult MatrixGraph::algorithmKruskal(){
     DynamicArray<EdgeData> mst_edges(matrix->getDegree()-1, EdgeData());    // zbiór krawędzi mst
     unsigned mst_edges_already_added = 0;                                   // liczba już wyznaczonych krawędzi MST
     DynamicArray<EdgeData> graph_edges = getEdgesList(false);               // zbiór krawędzi grafu
-    DynamicArray<int> subtrees(matrix->getDegree(), 0);                     // tablica przechowująca dane o przynależności wierzchołków do poddrzew                       
+    DisjointSets subtrees(matrix->getDegree());                             // dane o przynależności wierzchołków do poddrzew                
 
     // Sortowanie listy krawędzi
     SortingMachine::sort(graph_edges, 0, graph_edges.getLength()-1);
-
-    // Każdy wierzchołek umieszczam w osobnym poddrzewie
-    for(int i = 0; i < subtrees.getLength(); i++)
-        *subtrees[i] = i;
     
     // Sprawdzam kolejne krawędzie z posortowanej tablicy do dojścia do jej końca lub wyznaczenie wszystkich krawędzi MST
     EdgeData* edge;
-    int previous_subtree_id;
+    int end_subtree, being_subtree;
     for(int i = 0; mst_edges_already_added != matrix->getDegree()-1 && i < graph_edges.getLength(); i++){
 
         // Pobieram krawędź
         edge = graph_edges[i];
 
+        // Sprawdzam do jakich poddrzew należą krańce krawędzi
+        end_subtree = subtrees.getSet(edge->end);
+        being_subtree = subtrees.getSet(edge->begin);
+
         // Jeżeli wierzchołek początkowy i końcowy krawędzi nie są w tym samym poddrzewie, to dodaję krawędź do MST.
-        // Następnie łącze ich poddrzewa, włączając poddrzewo wierzchołka końcowego w poddrzewo wierzchołka początkowego.
-        if(*subtrees[edge->begin] == *subtrees[edge->end]) continue;    
+        // Następnie łącze ich poddrzewa, włączając poddrzewo o mniejszej randze do poddrzewa o większej randze
+        if(end_subtree == being_subtree) continue;    
 
         *mst_edges[mst_edges_already_added] = *edge;
         mst_edges_already_added++;
 
-        previous_subtree_id = *subtrees[edge->end];
-        for(int j = 0; j < subtrees.getLength(); j++)
-            if(*subtrees[j] == previous_subtree_id)
-                *subtrees[j] = *subtrees[edge->begin];
+        subtrees.unionSets(end_subtree, being_subtree);
 
     }
 

@@ -1,39 +1,16 @@
 #include "data-structures/AlgorithmResults.h"
 
-MSTResult::MSTResult(DynamicArray<VertexData>& prim_array){
-
-    // Inicjalizuje mst
-    mst = 0;
-
-    // Sczytuję dane nt kolejnych wierzchołków, budując w ten sposób krawędzie, które sortuje kolejno: wierzchołka początkowego, wagi 
-    for(int i = 0; i < prim_array.getLength(); i++){
-        // wierzchołek, startowy pomijam
-        if(prim_array[i]->predecessor == NULL_VERTEX) continue;
-
-        // wczytuję krawędź
-        mst += prim_array[i]->weight;
-        edges.push_back(EdgeData(
-            min(prim_array[i]->predecessor, i),
-            max(prim_array[i]->predecessor, i),
-            prim_array[i]->weight
-        ));
-
-    }
-
-}
-
 MSTResult::MSTResult(DynamicArray<EdgeData>& kruskal_array){
 
     // Inicjalizuje mst
     mst = 0;
 
     // Sczytuję kolejne krawędzie wyznaczone przez algorytm Kruskala
+    edges.resize(kruskal_array.getLength());
     for(int i = 0; i < kruskal_array.getLength(); i++){
-        edges.push_back(EdgeData(
-            min(kruskal_array[i]->begin, kruskal_array[i]->end),
-            max(kruskal_array[i]->end, kruskal_array[i]->begin),
-            kruskal_array[i]->weigth
-        ));
+        edges[i].begin = min(kruskal_array[i]->begin, kruskal_array[i]->end);
+        edges[i].end = max(kruskal_array[i]->end, kruskal_array[i]->begin);
+        edges[i].weigth = kruskal_array[i]->weigth;
         mst += kruskal_array[i]->weigth;
     }
 
@@ -44,12 +21,13 @@ Path::Path(DynamicArray<VertexData>& dijkstra_array, unsigned start, unsigned en
     // Z pomocą tablicy z algorytmu buduję ścieżkę od wierzchołka startowego do końcowego
     // Biorę wierzchołki od końca do początku ścieżki. Jeżeli dotrzemy do NULL_VERTEX, to oznacza,
     // że udało się przejść całą ścieżkę.
+    int verticies_in_path = 0;  // liczba wierzchołków w ścieżce, nie powinna przekroczyć |V|
     int vertex = end;
     distance = dijkstra_array[vertex]->weight;
-    if(distance == INFINITY_W) return;
-    while (vertex != NULL_VERTEX){
+    while (vertex != NULL_VERTEX && verticies_in_path < dijkstra_array.getLength()){
         path.insert(path.begin(), vertex);
         vertex = dijkstra_array[vertex]->predecessor;
+        verticies_in_path++;
     }  
 
     // Jeżeli ścieżka nie zawiera wierzchołka startowego na swoim początku, to nie
@@ -104,13 +82,17 @@ void PathfindingResult::print(){
 }
 
 PathfindingResult::PathfindingResult(DynamicArray<VertexData>& dijkstra_array, unsigned start){
-        
+    
+    // Jeżeli tablica wynikowa jest pusta, to ścieżek nie wyznaczamy
+    if(dijkstra_array.getLength() == 0) 
+        return;
+
     // Zapisuję wierzchołek startowy
     this->start = start;
 
     // Tworzymy ścieżki dla kolejnych wierzchołków
     for(int i = 0; i < dijkstra_array.getLength(); i++)
-            paths.push_back(Path(dijkstra_array, this->start, i));
+        paths.push_back(Path(dijkstra_array, this->start, i));
 
 }
 

@@ -127,8 +127,8 @@ class PathfindingResult{
 class MSTResult{
 
     /* POLA */
-    private: std::vector<EdgeData> edges;    // zbiór krawędzi drzewa rozpinającego
-    private: long long mst;                  // suma krawędzi drzewa rozpinającego
+    private: vector<EdgeData> edges;      // zbiór krawędzi drzewa rozpinającego
+    private: long long mst;               // suma krawędzi drzewa rozpinającego
 
     /* METODY */
 
@@ -137,14 +137,6 @@ class MSTResult{
      * Służy do sprawdzenia czy wynik algorytmu nie jest pusty.
      */
     public: bool isEmpty() { return edges.size() == 0 && mst == 0; }
-
-    /**
-     * @brief 
-     * Kontruktor. Tworzy strukturę przechowującą wynik algorytmu Prima.
-     * 
-     * @param prim_array tablica zawierająca stan wierzchołków na koniec algorytmu
-     */
-    public: MSTResult(DynamicArray<VertexData>& prim_array);
 
 
     /**

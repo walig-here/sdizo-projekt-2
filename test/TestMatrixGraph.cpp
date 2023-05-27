@@ -98,12 +98,12 @@ TEST(Prim, FiveVertexGraph){
         EdgeData(1, 4, 8),
         EdgeData(2, 3, 1)
     };
-    vector<EdgeData> mst_edges = result.getEdges();
+    DynamicArray<EdgeData> mst_edges = result.getEdges();
     bool found;
     for(auto proper_edge : mst_proper_edges){
         found = false;
-        for(auto edge : mst_edges){
-            if(proper_edge.begin == edge.begin && proper_edge.end == edge.end && proper_edge.weigth == edge.weigth){
+        for(int edge = 0; edge < mst_edges.getLength(); edge++){
+            if(proper_edge.begin == mst_edges[edge]->begin && proper_edge.end == mst_edges[edge]->end && proper_edge.weigth == mst_edges[edge]->weigth){
                 found = true;
                 break;
             }
@@ -315,14 +315,14 @@ TEST(Kruskal, FiveVertexGraph){
         EdgeData(0,4,7),
         EdgeData(1,2,10)
     };
-    vector<EdgeData> mst_edges = result.getEdges();
+    DynamicArray<EdgeData> mst_edges = result.getEdges();
     bool found;
     for(auto proper_edge : mst_proper_edges){
         found = false;
-        for(auto edge : mst_edges){
-            if(!((proper_edge.begin == edge.begin && proper_edge.end == edge.end) || (proper_edge.end == edge.begin && proper_edge.begin == edge.end)))
+        for(int edge = 0; edge < mst_edges.getLength(); edge++){
+            if(!((proper_edge.begin == mst_edges[edge]->begin && proper_edge.end == mst_edges[edge]->end) || (proper_edge.end == mst_edges[edge]->begin && proper_edge.begin == mst_edges[edge]->end)))
                 continue;
-            if(proper_edge.weigth != edge.weigth) continue;
+            if(proper_edge.weigth != mst_edges[edge]->weigth) continue;
 
             found = true;
             break;

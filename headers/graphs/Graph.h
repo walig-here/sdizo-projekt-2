@@ -41,18 +41,12 @@ struct VertexData{
 struct EdgeData{
 
     /* POLA */
-    unsigned begin = -1;                // wierzchołek początkowy
-    unsigned end = -1;                  // wierzchołek końcowy
-    int weigth = NO_CONNECTION;         // waga krawędzi
+    unsigned begin;     // wierzchołek początkowy
+    unsigned end;       // wierzchołek końcowy
+    int weigth;         // waga krawędzi
 
     /* KONSTRUKTOR */
-    EdgeData(unsigned begin, unsigned end, int weigth);
-
-    /* KONSTRUKTOR DOMYŚLNY */
-    EdgeData(){
-        begin = end = -1;
-        weigth = NO_CONNECTION;
-    }
+    EdgeData(unsigned begin=NULL_VERTEX, unsigned end=NULL_VERTEX, int weigth=INFINITY_W);
 
 };
 

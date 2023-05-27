@@ -1,6 +1,7 @@
 #include "data-structures/DynamicArray.h"
 #include "app/utility/FileReader.h"
 #include "data-structures/AlgorithmResults.h"
+#include "data-structures/DisjointSet.h"
 
 #include <cstring>
 #include <iostream>
