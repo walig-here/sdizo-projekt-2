@@ -286,7 +286,6 @@ PathfindingResult ListGraph::algorithmBellmanFord(unsigned start){
 
 #include "app/utility/SortingMachine.h"
 #include "data-structures/DisjointSet.h"
-#include "app/utility/Timer.h"
 MSTResult ListGraph::algorithmKruskal(){
     
     // Jeżeli graf jest pusty, to nie ma sensu wykonywać algorytmu
