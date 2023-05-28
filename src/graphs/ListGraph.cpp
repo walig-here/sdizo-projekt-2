@@ -106,7 +106,7 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
     queue.add(VertexData(start, 0, NULL_VERTEX));
 
     // Algorytm kończy się, gdy drzewo zawiera wsystkie wierzchołki, czyli gdy |E| = |V|-1
-    VertexData current_vertex;         // rozważany wierzchołek
+    VertexData current_vertex;          // rozważany wierzchołek
     VertexData* neighbour;              // sąsiad rozważanego wierzchołka
     while ( edges_already_added != verticies_count-1 && queue.root() != nullptr){
         
@@ -114,14 +114,14 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
         current_vertex = *queue.root();
         queue.pop_root();
 
-        // Jeżeli ten wierzchołek był już rozpatrzony to go pomijam
+        // Jeżeli ten wierzchołek jest już zawarty w MST, to go pomijam
         if(*vertex_status[current_vertex.vertex] == 1) continue;
 
-        // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako rozważeni
+        // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako należący do MST
         for(int i = 0; adjentency_lists[current_vertex.vertex][i] != nullptr; i++){
             if(*vertex_status[adjentency_lists[current_vertex.vertex][i]->end] == 1) continue;
 
-            // Jeżeli sąsiad nie jest rozważony, to dodaję tę krawędź do niego prowadzącą do kolejki
+            // Jeżeli sąsiad nie nalezy do MST, to dodaję krawędź do niego prowadzącą do kolejki
             queue.add(VertexData(
                 adjentency_lists[current_vertex.vertex][i]->end, 
                 adjentency_lists[current_vertex.vertex][i]->weigth, 
@@ -129,7 +129,7 @@ MSTResult ListGraph::alogrithmPrim(unsigned start){
             ));
         }
 
-        // Nadaję wierzchołkowi status rozważonego
+        // Nadaję wierzchołkowi status należącego do MST
         *vertex_status[current_vertex.vertex] = 1;
 
         // Zapisuje dane o krawędzi prowadzącej do wierzchołka do MST
@@ -205,13 +205,13 @@ PathfindingResult ListGraph::algorithmDijkstra(unsigned start){
 
 DynamicArray<EdgeData> ListGraph::getEdgesList(bool directional){
 
-    // towrzę tablicę krawędzi
+    // Tworzę tablicę krawędzi
     int edge_count;
     if(directional) edge_count = verticies_count*verticies_count;
     else edge_count = verticies_count*verticies_count/2 - verticies_count/2;
     DynamicArray<EdgeData> edges(edge_count, EdgeData());
 
-    // zbieram wszystkie krawędzie 
+    // Zbieram wszystkie krawędzie 
     int current_edge = 0;
     for(int vertex = 0; vertex < verticies_count; vertex++){
         for(int i = 0; adjentency_lists[vertex][i] != nullptr; i++){
@@ -240,9 +240,6 @@ PathfindingResult ListGraph::algorithmBellmanFord(unsigned start){
 
     // Inicjalizacja tablicy ze stanami wierzchołków
     DynamicArray<VertexData> bf_array(verticies_count, VertexData());
-
-    // Sprawdzam, czy wierzchołek startowy znajduje się w grafie
-    if(start >= bf_array.getLength()) return PathfindingResult(bf_array, start);
 
     // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
     bf_array[start]->weight = 0;

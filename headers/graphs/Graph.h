@@ -4,7 +4,7 @@
 class MSTResult;
 class PathfindingResult;
 
-#define NO_CONNECTION -2147483648       // oznaczenie braku połączenia między wierzchołkami
+#define NO_CONNECTION -2147483648           // oznaczenie braku połączenia między wierzchołkami
 #define INFINITY_W 2147483647               // waga krawędzi równa nieskończoność
 #define NULL_VERTEX -2147483648             // oznacza wierchołek NULL
 
@@ -12,13 +12,12 @@ class PathfindingResult;
 /**
  * @brief 
  * Element tablicy obrazującej stan wierzchołka wewnątrz zaimplementowanych algorytmów.
- * Dla każdego algorytmu interpretacja pól struktury może się różnić.
  */
 struct VertexData{
 
     /* POLA */
     int vertex;           // indeks wierzchołka reprezentowanego przez strukturę
-    int weight;            // waga przypisana do wierzchołka             
+    int weight;           // waga przypisana do wierzchołka             
     int predecessor;      // indeks wierzchołka poprzedzającego  
 
     /**

@@ -26,7 +26,7 @@ class Path{
 
     /**
      * @brief 
-     * Konstruktor. Tworzy strukturę przechowującą ścieżkę z algorytmu Dijkstry.
+     * Konstruktor. Tworzy strukturę przechowującą ścieżkę z algorytmu Dijkstry lub Bellmana-Forda.
      * 
      * @param dijkstra_array tablica zawierająca stan wierzchołków na koniec algorytmu
      * @param start wierzchołek startowy
@@ -80,12 +80,12 @@ class PathfindingResult{
 
     /**
      * @brief 
-     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Dijkstry.
+     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Dijkstry lub Bellmana-Forda.
      * 
-     * @param dijkstra_array tablica zawierająca stan wierzchołków na koniec algorytmu 
+     * @param verticies tablica zawierająca stan wierzchołków na koniec algorytmu 
      * @param start wierzchołek startowy
      */
-    public: PathfindingResult(DynamicArray<VertexData>& dijkstra_array, unsigned start);
+    public: PathfindingResult(DynamicArray<VertexData>& verticies, unsigned start);
 
 
     /**
@@ -141,11 +141,11 @@ class MSTResult{
 
     /**
      * @brief 
-     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Kruskala.
+     * Konstruktor. Tworzy strukturę przechowującą wynik algorytmu Kruskala lub Prima.
      * 
-     * @param kruskal_array tablica wynikowa algorytmu, zawierająca krawędzie składające się na MST
+     * @param mst_edges tablica wynikowa algorytmu, zawierająca krawędzie składające się na MST
      */
-    public: MSTResult(DynamicArray<EdgeData>& kruskal_array);
+    public: MSTResult(DynamicArray<EdgeData>& mst_edges);
 
 
     /**

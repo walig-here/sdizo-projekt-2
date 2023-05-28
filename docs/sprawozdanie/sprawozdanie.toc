@@ -5,17 +5,30 @@
 \contentsline {subsection}{\numberline {2.1}Środowisko pomiarowe:}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Pomiary wykonywane w programie:}{4}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Narzędzie pomiarowe:}{4}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Przebieg pomiaru:}{5}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2}Przebieg pomiaru:}{4}{subsubsection.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.3}Generowanie grafu:}{6}{subsubsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.3}Przetworzenie wyników w arkuszu kalkulacyjnym:}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Wyznaczanie MST:}{7}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Algorytm Prima:}{7}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Algorytm Kruskala:}{7}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Wyniki pomiarów:}{7}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Analiza wyników pomiarów:}{7}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Wyznaczanie najkrótszej ścieżki:}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Algorytm Dijkstry:}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Algorytm Bellmana-Forda:}{7}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Wyniki pomiarów:}{7}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Analiza wyników pomiarów:}{7}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Wnioski:}{7}{section.5}%
+\contentsline {section}{\numberline {3}Wyznaczanie MST:}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Algorytm Prima:}{8}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Opis teoretyczny:}{8}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Zastosowana implementacja:}{8}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Algorytm Kruskala:}{9}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Opis teoretyczny:}{9}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Zastosowana implementacja:}{10}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Wyniki pomiarów:}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analiza wyników pomiarów:}{17}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Algorytm Prima - reprezentacja macierzowa:}{17}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Algorytm Kruskala - reprezentacja macierzowa:}{17}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Reprezentacje listowe:}{18}{subsubsection.3.4.3}%
+\contentsline {section}{\numberline {4}Wyznaczanie najkrótszej ścieżki:}{18}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Algorytm Dijkstry:}{18}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Opis teoretyczny:}{18}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Zastosowana implementacja:}{19}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Algorytm Bellmana-Forda:}{20}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Opis teoretyczny:}{20}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Zastosowana implementacja:}{20}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Wyniki pomiarów:}{21}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Analiza wyników pomiarów:}{28}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Algorytm Bellmana-Forda:}{28}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Algorytm Dijkstry:}{28}{subsubsection.4.4.2}%
+\contentsline {section}{\numberline {5}Wnioski:}{28}{section.5}%

@@ -87,7 +87,6 @@ vector<EdgeData> GraphGenerator::ensureConnectivity(vector<EdgeData>& all_edges,
     all_edges.erase(all_edges.begin() + chosen_edge);
     tree_includement[chosen_edges[already_chosen_edges].end] = true;
     tree_includement[chosen_edges[already_chosen_edges].begin] = true;
-    printf("%d %d\n", chosen_edges[already_chosen_edges].begin, chosen_edges[already_chosen_edges].end);
     already_chosen_edges++;
 
     // Losuję krawędź. Jeżeli zawiera ona oba wierzchołki już obecne w grafie lub oba wierzchołki nieobecne w grafie, to
@@ -102,12 +101,8 @@ vector<EdgeData> GraphGenerator::ensureConnectivity(vector<EdgeData>& all_edges,
         
         chosen_edges[already_chosen_edges] = all_edges[chosen_edge];
         all_edges.erase(all_edges.begin() + chosen_edge);
-
         tree_includement[chosen_edges[already_chosen_edges].end] = true;
         tree_includement[chosen_edges[already_chosen_edges].begin] = true;
-
-        printf("%d %d\n", chosen_edges[already_chosen_edges].begin, chosen_edges[already_chosen_edges].end);
-
         already_chosen_edges++;
 
     } while (already_chosen_edges < size-1);

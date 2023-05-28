@@ -1,11 +1,6 @@
 #include "data-structures/DynamicArray.h"
 #include "graphs/Graph.h"
 
-/** 
- * Inipirowane implementacją zamieszczoną na portalu:
- * https://eduinf.waw.pl/inf/alg/001_search/0141.php
- */
-
 /**
  * @brief 
  * Zbiór rozłączny.

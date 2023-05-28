@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7.26 32-bit) (preloaded format=pdflatex 2022.11.7)  28 MAY 2023 01:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7.26 32-bit) (preloaded format=pdflatex 2022.11.7)  28 MAY 2023 18:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -518,53 +518,209 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--59
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 61--62
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--68
+Underfull \hbox (badness 10000) in paragraph at lines 63--65
 
  []
 
 [3]
 
-LaTeX Warning: Reference `timer-przyklad' on page 4 undefined on input line 82.
+LaTeX Warning: Reference `timer-przyklad' on page 4 undefined on input line 79.
 
 
-<fig2.png, id=127, 258.9675pt x 88.83188pt>
+<fig2.png, id=192, 258.9675pt x 88.83188pt>
 File: fig2.png Graphic file (type png)
 <use fig2.png>
-Package pdftex.def Info: fig2.png  used on input line 86.
+Package pdftex.def Info: fig2.png  used on input line 83.
 (pdftex.def)             Requested size: 199.16928pt x 68.32213pt.
-<fig1.png, id=131, 438.8897pt x 161.85469pt>
+<fig1.png, id=196, 438.8897pt x 161.85469pt>
 File: fig1.png Graphic file (type png)
 <use fig1.png>
-Package pdftex.def Info: fig1.png  used on input line 95.
+Package pdftex.def Info: fig1.png  used on input line 92.
 (pdftex.def)             Requested size: 341.43306pt x 125.91766pt.
 [4 <./fig2.png>] [5 <./fig1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 136--138
+Underfull \hbox (badness 10000) in paragraph at lines 133--135
 
  []
 
-[6] [7] (sprawozdanie.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 191--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
+
+ []
+
+[9] [10] [11] [12] [13]
+<fig5.png, id=273, 536.9661pt x 714.0276pt>
+File: fig5.png Graphic file (type png)
+<use fig5.png>
+Package pdftex.def Info: fig5.png  used on input line 448.
+(pdftex.def)             Requested size: 398.33858pt x 529.71227pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 448--450
+ [][] 
+ []
+
+[14]
+<fig6.png, id=281, 536.9661pt x 715.473pt>
+File: fig6.png Graphic file (type png)
+<use fig6.png>
+Package pdftex.def Info: fig6.png  used on input line 455.
+(pdftex.def)             Requested size: 398.33858pt x 530.78456pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 455--457
+ [][] 
+ []
+
+[15 <./fig5.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 462--463
+
+ []
+
+[16 <./fig6.png>]
+<fig7.png, id=294, 878.53218pt x 277.035pt>
+File: fig7.png Graphic file (type png)
+<use fig7.png>
+Package pdftex.def Info: fig7.png  used on input line 469.
+(pdftex.def)             Requested size: 398.33858pt x 125.6157pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 469--471
+ [][] 
+ []
+
+<fig8.png, id=295, 932.73468pt x 488.57532pt>
+File: fig8.png Graphic file (type png)
+<use fig8.png>
+Package pdftex.def Info: fig8.png  used on input line 476.
+(pdftex.def)             Requested size: 398.33858pt x 208.65192pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 476--478
+ [][] 
+ []
+
+[17 <./fig7.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 481--482
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--494
+
+ []
+
+[18 <./fig8.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 495--497
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
+
+ []
+
+[19]
+Overfull \hbox (10.8993pt too wide) in paragraph at lines 510--511
+\OT4/cmr/m/n/12 szu-ki-wa-nie naj-krót-szych ±cie-»ek z wy-bra-ne-go wierz-choª
+-ka star-to-we-go do wszyst-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 510--511
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 512--514
+
+ []
+
+[20] [21] [22] [23] [24]
+<fig4.png, id=346, 538.4115pt x 714.0276pt>
+File: fig4.png Graphic file (type png)
+<use fig4.png>
+Package pdftex.def Info: fig4.png  used on input line 766.
+(pdftex.def)             Requested size: 398.33858pt x 528.26321pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 766--768
+ [][] 
+ []
+
+[25]
+<fig3.png, id=353, 537.6888pt x 713.3049pt>
+File: fig3.png Graphic file (type png)
+<use fig3.png>
+Package pdftex.def Info: fig3.png  used on input line 773.
+(pdftex.def)             Requested size: 398.33858pt x 528.46864pt.
+
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 773--775
+ [][] 
+ []
+
+[26 <./fig4.png>] [27 <./fig3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 783--784
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 791--792
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 793--795
+
+ []
+
+[28] [29] (sprawozdanie.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `sprawozdanie.out' has not changed.
-(rerunfilecheck)             Checksum: F3309E79A11CEB4D05FB1824090DC5C3;3412.
+(rerunfilecheck)             Checksum: E5E10E4CEE0461FF12C1FE2EAECC3D88;5968.
  ) 
 Here is how much of TeX's memory you used:
- 12093 strings out of 475380
- 190250 string characters out of 2776772
- 541350 words of memory out of 3000000
- 33280 multiletter control sequences out of 15000+600000
+ 12231 strings out of 475380
+ 191955 string characters out of 2776772
+ 565319 words of memory out of 3000000
+ 33337 multiletter control sequences out of 15000+600000
  477120 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,16n,77p,1101b,462s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plmi.enc}{C:
-/Users/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plrm.enc}{C:/User
-s/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plms.enc}{C:/Users/Daw
+{C:/Users/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plms.enc}{C:
+/Users/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plmi.enc}{C:/User
+s/Dawid/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plrm.enc}{C:/Users/Daw
 id/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/pl/plit.enc} <C:\Users\Dawid\A
 ppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Da
 wid/AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plbx12.pfb><C:/Users/Da
@@ -572,11 +728,12 @@ wid/AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plmi12.pfb><C:/Users/Da
 wid/AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plr12.pfb><C:/Users/Daw
 id/AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plr17.pfb><C:/Users/Dawi
 d/AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plr8.pfb><C:/Users/Dawid/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plsy10.pfb><C:/Users/Dawid/
 AppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plsy8.pfb><C:/Users/Dawid/A
 ppData/Local/Programs/MiKTeX/fonts/type1/public/pl/plti12.pfb>
-Output written on sprawozdanie.pdf (7 pages, 98795 bytes).
+Output written on sprawozdanie.pdf (29 pages, 550995 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 179 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 440 PDF objects out of 1000 (max. 8388607)
+ 109 named destinations out of 1000 (max. 500000)
+ 313 words of extra memory for PDF output out of 10000 (max. 10000000)
 

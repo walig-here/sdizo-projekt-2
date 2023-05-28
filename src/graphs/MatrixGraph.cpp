@@ -115,15 +115,15 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
         current_vertex = *queue.root();
         queue.pop_root();
 
-        // Jeżeli ten wierzchołek był już rozpatrzony to go pomijam
+        // Jeżeli ten wierzchołek jest już zawarty w MST, to go pomijam
         if(*vertex_status[current_vertex.vertex] == 1) continue;
 
-        // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako rozważeni
+        // Sprawdzam wszystkich sąsiadów wierzchołka, ktorzy nie są oznaczeni jako należący do MST
         for(int i = 0; i < matrix->getDegree(); i++){
             if(*matrix->get(current_vertex.vertex, i) == NO_CONNECTION) continue;
             if(*vertex_status[i] == 1) continue;
 
-            // Jeżeli sąsiad nie jest rozważony, to dodaję tę krawędź do niego prowadzącą do kolejki
+            // Jeżeli sąsiad nie jest częścią MST, to dodaję krawędź do niego prowadzącą do kolejki
             queue.add(VertexData(
                 i, 
                 *matrix->get(current_vertex.vertex, i), 
@@ -131,7 +131,7 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
             ));
         }
 
-        // Nadaję wierzchołkowi status rozważonego
+        // Nadaję wierzchołkowi status należącego do MST
         *vertex_status[current_vertex.vertex] = 1;
 
         // Zapisuje dane o krawędzi prowadzącej do wierzchołka do MST
@@ -208,13 +208,13 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
 
 DynamicArray<EdgeData> MatrixGraph::getEdgesList(bool directional){
 
-    // towrzę tablicę krawędzi
+    // Tworzę tablicę krawędzi
     int edge_count;
     if(directional) edge_count = matrix->getDegree()*matrix->getDegree();
     else edge_count = matrix->getDegree()*matrix->getDegree()/2 - matrix->getDegree()/2;
     DynamicArray<EdgeData> edges(edge_count, EdgeData());
 
-    // zbieram wszystkie krawędzie 
+    // Zbieram wszystkie krawędzie 
     int current_edge = 0;
     for(int vertex = 0; vertex < matrix->getDegree() && current_edge < edge_count; vertex++){
         for(int neighbour =  ( !directional ? vertex+1 : 0 ); neighbour < matrix->getDegree() && current_edge < edge_count; neighbour++){
@@ -244,9 +244,6 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
 
     // Inicjalizacja tablicy ze stanami wierzchołków
     DynamicArray<VertexData> bf_array(matrix->getDegree(), VertexData());
-
-    // Sprawdzam, czy wierzchołek startowy znajduje się w grafie
-    if(start >= bf_array.getLength()) return PathfindingResult(bf_array, start);
 
     // Wybieram wierzchołek startowy. Ustawiam jego wagę na 0.
     bf_array[start]->weight = 0;
