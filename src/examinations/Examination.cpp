@@ -19,11 +19,6 @@ Examination::Examination(){
     int8_t p = 0;
 
                         /* ### macierzowe ### */
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(MATRIX,    10,    0.99); p++;
-
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(MATRIX,    100,    0.75); p++;
@@ -50,11 +45,6 @@ Examination::Examination(){
     phase_graphs[p] = PhaseGraphData(MATRIX,    500,    0.99); p++;
 
                         /* ### listowe ### */
-    phase_graphs[p] = PhaseGraphData(LIST,    10,    0.25); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,    10,    0.50); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,    10,    0.75); p++;
-    phase_graphs[p] = PhaseGraphData(LIST,    10,    0.99); p++;
-
     phase_graphs[p] = PhaseGraphData(LIST,    100,    0.25); p++;
     phase_graphs[p] = PhaseGraphData(LIST,    100,    0.50); p++;
     phase_graphs[p] = PhaseGraphData(LIST,    100,    0.75); p++;

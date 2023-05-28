@@ -107,7 +107,7 @@ MSTResult MatrixGraph::alogrithmPrim(unsigned start){
     queue.add(VertexData(start, 0, NULL_VERTEX));
 
     // Algorytm kończy się, gdy drzewo zawiera wsystkie wierzchołki, czyli gdy |E| = |V|-1
-    VertexData current_vertex;         // rozważany wierzchołek
+    VertexData current_vertex;          // rozważany wierzchołek
     VertexData* neighbour;              // sąsiad rozważanego wierzchołka
     while ( edges_already_added != matrix->getDegree()-1 && queue.root() != nullptr){
         
@@ -183,11 +183,11 @@ PathfindingResult MatrixGraph::algorithmDijkstra(unsigned start){
             if(*vertex_status[i] == 1) continue;
 
             // W ramach optymalizacji pomijam sprawdzenie, czy sąsiad znajduje się juz w kolejce.
-            // Zamiast tradycyjnej relaksacji po prostu dodaję dane o dordzę prowadzącej do sąsiada od
+            // Zamiast tradycyjnej relaksacji po prostu dodaję dane o dordze prowadzącej do sąsiada od
             // aktualnego wierzchołka. Kolejka sama umieści go w odpowiednim miejscu, co spowoduje, że
-            // ta kopie wierzchołka o najmniejszej wadze zostanie pobrana pobrana z kolejki przed kopiami
+            // ta kopia wierzchołka o najmniejszej wadze zostanie pobrana pobrana z kolejki przed kopiami
             // o większych wagach. Następnie wierzchołek zostanie oznaczony jako odwiedzony, co spodowuje, że
-            // owe gorsze pod względem wagowym kopie nie zostaną rozważone.
+            // owe gorsze pod względem wagowym kopie nie zostaną rozważone po wyciągnięciu z kolejki.
             queue.add(VertexData(
                     i, 
                     *matrix->get(current_vertex.vertex, i) + current_vertex.weight, 
@@ -313,7 +313,7 @@ MSTResult MatrixGraph::algorithmKruskal(){
     
     // Sprawdzam kolejne krawędzie z posortowanej tablicy do dojścia do jej końca lub wyznaczenie wszystkich krawędzi MST
     EdgeData* edge;
-    int end_subtree, being_subtree;
+    int end_subtree, begin_subtree;
     for(int i = 0; mst_edges_already_added != matrix->getDegree()-1 && i < graph_edges.getLength(); i++){
 
         // Pobieram krawędź
@@ -321,16 +321,16 @@ MSTResult MatrixGraph::algorithmKruskal(){
 
         // Sprawdzam do jakich poddrzew należą krańce krawędzi
         end_subtree = subtrees.getSet(edge->end);
-        being_subtree = subtrees.getSet(edge->begin);
+        begin_subtree = subtrees.getSet(edge->begin);
 
         // Jeżeli wierzchołek początkowy i końcowy krawędzi nie są w tym samym poddrzewie, to dodaję krawędź do MST.
         // Następnie łącze ich poddrzewa, włączając poddrzewo o mniejszej randze do poddrzewa o większej randze
-        if(end_subtree == being_subtree) continue;    
+        if(end_subtree == begin_subtree) continue;    
 
         *mst_edges[mst_edges_already_added] = *edge;
         mst_edges_already_added++;
 
-        subtrees.unionSets(end_subtree, being_subtree);
+        subtrees.unionSets(end_subtree, begin_subtree);
 
     }
 

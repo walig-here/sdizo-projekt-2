@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Założenia projektowe:}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cele projektu:}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Grafy:}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Metoda pomiarowa:}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Środowisko pomiarowe:}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Pomiary wykonywane w programie:}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Narzędzie pomiarowe:}{4}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Przebieg pomiaru:}{5}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Generowanie grafu:}{6}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Przetworzenie wyników w arkuszu kalkulacyjnym:}{7}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Wyznaczanie MST:}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Algorytm Prima:}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Algorytm Kruskala:}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Wyniki pomiarów:}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Analiza wyników pomiarów:}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Wyznaczanie najkrótszej ścieżki:}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Algorytm Dijkstry:}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Algorytm Bellmana-Forda:}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Wyniki pomiarów:}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Analiza wyników pomiarów:}{7}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Wnioski:}{7}{section.5}%

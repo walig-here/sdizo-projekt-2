@@ -57,4 +57,16 @@ class GraphGenerator{
      */
     private: static vector<EdgeData> getAllPossibleEdges(int verticies, bool directed, int max_egde_count, bool not_negative);
 
+
+    /**
+     * @brief 
+     * Sprawia, że generowany graf jest spójny.
+     * 
+     * @param all_edges zbiór wszystkich, możliwych krawędzi
+     * @param size liczba wierzchołków
+     * 
+     * @return zbiór krawędzi niezbędnych do zapewniania spójności
+     */
+    private: static vector<EdgeData> ensureConnectivity(vector<EdgeData>& all_edges, unsigned size);
+
 };
