@@ -30,11 +30,6 @@ Path::Path(DynamicArray<VertexData>& dijkstra_array, unsigned start, unsigned en
         verticies_in_path++;
     }  
 
-    // Jeżeli ścieżka nie zawiera wierzchołka startowego na swoim początku, to nie
-    // jest ona uznawana za poprawną
-    if(path[0] == start) return;
-    path.clear();
-
 }
 
 void MSTResult::print(){
@@ -81,7 +76,7 @@ void PathfindingResult::print(){
 
 }
 
-PathfindingResult::PathfindingResult(DynamicArray<VertexData>& dijkstra_array, unsigned start){
+PathfindingResult::PathfindingResult(DynamicArray<VertexData>& dijkstra_array, unsigned start, bool negative_cycle){
     
     // Jeżeli tablica wynikowa jest pusta, to ścieżek nie wyznaczamy
     if(dijkstra_array.getLength() == 0) 
@@ -93,6 +88,9 @@ PathfindingResult::PathfindingResult(DynamicArray<VertexData>& dijkstra_array, u
     // Tworzymy ścieżki dla kolejnych wierzchołków
     for(int i = 0; i < dijkstra_array.getLength(); i++)
         paths.push_back(Path(dijkstra_array, this->start, i));
+
+    // Odwnotouję istnitnie ujemnego cyklu
+    this->nagative_cycle = negative_cycle;
 
 }
 

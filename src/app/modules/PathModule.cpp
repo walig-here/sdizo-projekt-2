@@ -75,8 +75,8 @@ void PathModule::algorithmBellmanFord(){
     // Wykonuję algorytm Belmanna-Forda dla wczytanego aktualnie grafu oraz 
     // wierzchołka początkowego
     PathfindingResult result = graph->algorithmBellmanFord(begin);
-    if(result.isEmpty()) cout << "Graf zawiera ujemny cykl!" << endl;
-    else result.print();
+    if(result.doCointainNegativeCycle()) cout << "Graf zawiera ujemny cykl!" << endl;
+    result.print();
     Console::waitForUserResponse();
 
     // Zwolnienie instancji grafu

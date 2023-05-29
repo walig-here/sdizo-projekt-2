@@ -76,7 +76,7 @@ Pomiary przeprowadzano na komputerze stacjonarnym z zainstalowanym systemem Wind
 \subsection{Pomiary wykonywane w programie:}
 
 \subsubsection{Narzędzie pomiarowe:}
-W pomiarach czasu wykorzystano specjalną klasę \it Timer\rm. Instancja wspomnianej klasy działała na zasadzie stopera, mierząc czas pomiędzy wywołaniami swoich metod \it start() \rm oraz \it stop()\rm. Precyzja prowadzonego nią pomiaru była rzędu 0,1 mikrosekundy ($10^{-7}s$). Przykład użycia \it Timer \rm został zamieszczony na rysunku \ref{timer-przyklad}.
+W pomiarach czasu wykorzystano specjalną klasę \it Timer\rm. Instancja wspomnianej klasy działała na zasadzie stopera, mierząc czas pomiędzy wywołaniami swoich metod \it start() \rm oraz \it stop()\rm. Precyzja prowadzonego nią pomiaru była rzędu 0,1 mikrosekundy ($10^{-7}s$). Przykład użycia \it Timer \rm został zamieszczony na rysunku \ref{fig.timer-przyklad}.
 \begin{figure}[H]
 	\centering
 	\caption{\centering Przykład użycia klasy \it Timer \rm do pomiaru czasu wykonania algorytmu Bellmana-Forda.}
@@ -85,7 +85,7 @@ W pomiarach czasu wykorzystano specjalną klasę \it Timer\rm. Instancja wspomni
 \end{figure}
 
 \subsubsection{Przebieg pomiaru:}
-Pomiary czasu wykonywania algorytmów zostały wkomponowane jako jedne z opcji możliwych do wyboru z poziomu aplikacji projektowej (rys. \ref{fig.opcja-badanie}). W wypadku wybrania takiej opcji aplikacja dawała użytkownikowi opcję wyboru algorytmu, który miał zostać przebadany. Następnie wykonywany był właściwy pomiar, dzielący się na 40 faz. Każda faza wyróżniała się inną kombinacją parametrów używanego w pomiarach grafu. Owe parametry oraz ich dopuszczalne wartości zamieszczono w tabeli \ref{tab-parametry}. W trakcie jednej fazy wykonywano łącznie 100 prób. Dla każdej z osobna generowano nową, losową instancję grafu (odpowiedniego dla danego algorytmu). Później za pomocą klasy \it Timer \rm dokonywano pomiaru czasu wykonywania wybranego algorytmu. W końcu dane o próbie były zapisywane w specjalnej strukturze, która po zakończeniu się danej fazy była zapisywana do pliku \it *.csv \rm w formie jednego z jego z rekordów. Pola takiego rekordu została zamieszczona w tabeli \ref{tab.wynik-pomairu}.
+Pomiary czasu wykonywania algorytmów zostały wkomponowane jako jedne z opcji możliwych do wyboru z poziomu aplikacji projektowej (rys. \ref{fig.opcja-badanie}). W wypadku wybrania takiej opcji aplikacja dawała użytkownikowi możliwość wyboru algorytmu, który miał zostać przebadany. Następnie wykonywany był właściwy pomiar, dzielący się na 40 faz. Każda faza wyróżniała się inną kombinacją parametrów używanego w pomiarach grafu. Owe parametry oraz ich dopuszczalne wartości zamieszczono w tabeli \ref{tab-parametry}. W trakcie jednej fazy wykonywano łącznie 100 prób. Dla każdej z osobna generowano nową, losową instancję grafu (odpowiedniego dla danego algorytmu). Później za pomocą klasy \it Timer \rm dokonywano pomiaru czasu wykonywania wybranego algorytmu. W końcu dane o próbie były zapisywane w specjalnej strukturze, która po zakończeniu się danej fazy była zapisywana do pliku \it *.csv \rm w formie jednego z jego z rekordów. Pola takiego rekordu została zamieszczona w tabeli \ref{tab.wynik-pomairu}.
 \begin{figure}[H]
 	\centering
 	\caption{\centering Menu główne, zawierające opcję przeprowadzenia pomiarów.}
@@ -120,7 +120,7 @@ Pomiary czasu wykonywania algorytmów zostały wkomponowane jako jedne z opcji m
 \end{table}
 
 \subsubsection{Generowanie grafu:}
-Za generowanie losowych instancji grafów, używanych w badaniach odpowiedzialna była klasa \it GraphGenerator\rm. Była ona paremetryzowana wartościami takimi jak:
+Za generowanie losowych instancji grafów, używanych w badaniach odpowiedzialna była klasa \it GraphGenerator\rm. Była ona parametryzowana wartościami takimi jak:
 \begin{itemize}
 	\item Typ reprezentacji grafu
 	\item Liczba wierzchołków
@@ -178,10 +178,10 @@ Pierwszym krokiem algorytmu Prima jest wybranie dowolnego wierzchołka startoweg
 Książkowa implementacja algorytmu zakłada użycie kolejki priorytetowej (kopca minimalnego), przechowującej krawędzie, która pozwoli na łatwy dostęp do krawędzi o minimalnej wadze. Taki dostęp będzie mieć wówczas złożoność jednostkową $O(1)$. Dodawanie krawędzi do wspomnianej kolejki będzie miało złożoność $O(\log E)$. W ramach optymalizacji zamiast krawędzi można przechowywać w kopcu pary w postaci: indeks wierzchołka, indeks krawędzi o minimalnej wadze od niego prowadzącej. Wówczas kolejka będzie krótsza, a złożoność dodawania do niej elementu wyniesie $O(\log V)$. W najgorszym wypadku, gdy musimy rozważyć wszystkie krawędzie grafu, aby wyznaczyć MST, wspomniane wcześniej operacje należy powtórzyć dla każdej krawędzi, a więc $E$ razy. W efekcie daje to łączną złożoność algorytmu równą $O(E \cdot \log V)$.
 
 \subsubsection{Zastosowana implementacja:}
-Przy implementacji algorytmu Dijkstry wykorzystano kolejkę priorytetową. Była ona de facto zmodyfikowanym kopcem, stworzonym na potrzeby poprzedniego zadania projektowego. Zamiast liczb całkowitych ze znakiem przechowywał on strukturę o polach: indeks wierzchołka, sąsiad z przypisanej krawędzi, waga przypisanej krawędzi. W celu zoptymalizowania operacji dodawania i usuwania elementów pozbyto się przymusu każdorazowej relokacji kopca, występującego przy tychże działaniach. Dokonano tego poprzez zwirtualizowanie tychże operacji. Rzeczywisty rozmiar tablicy, na której bazował kopiec pozostawał stały. Zmniejszany bądź zwiększany był jedynie jej obszar uznawany w danym momencie za właściwy kopiec.\\
+Przy implementacji algorytmu Prima wykorzystano kolejkę priorytetową. Była ona de facto zmodyfikowanym kopcem, stworzonym na potrzeby poprzedniego zadania projektowego. Zamiast liczb całkowitych ze znakiem przechowywał on strukturę o polach: indeks wierzchołka, sąsiad z przypisanej krawędzi, waga przypisanej krawędzi. W celu zoptymalizowania operacji dodawania i usuwania elementów pozbyto się przymusu każdorazowej relokacji kopca, występującego przy tychże działaniach. Dokonano tego poprzez zwirtualizowanie tychże operacji. Rzeczywisty rozmiar tablicy, na której bazował kopiec pozostawał stały. Zmniejszany bądź zwiększany był jedynie jej obszar uznawany w danym momencie za właściwy kopiec.\\
 
 \noindent
-De facto zdecydowano się także na przechowywanie nadmiarowych elementów w kopcu. W teoretycznej implementacji, zakładającej przechowywanie wierzchołków w kopcu, istnieje wymóg zmieniania przypisywanej im wagi w wypadku znalezienia takiej krawędzi łączącej go z drzewem, której waga byłaby mniejsza od tej aktualnie przypisanej do wierzchołka. Taka operacja wymagałaby jego uprzedniego odnalezienia w kopcu. Tak operacja miałaby złożoność $O(V)$ i znacznie spowolniłaby działanie algorytmu. W związku z tym zrezygnowano z jej użycia.
+De facto zdecydowano się także na przechowywanie nadmiarowych elementów w kopcu. W teoretycznej implementacji, zakładającej przechowywanie wierzchołków w kopcu, istnieje wymóg zmieniania przypisywanej im wagi w wypadku znalezienia takiej krawędzi łączącej go z drzewem, której waga byłaby mniejsza od tej aktualnie przypisanej do wierzchołka. Taka operacja wymagałaby jego uprzedniego odnalezienia w kopcu. Taka operacja miałaby złożoność $O(V)$ i znacznie spowolniłaby działanie algorytmu. W związku z tym zrezygnowano z jej użycia.
 
 \subsection{Algorytm Kruskala:}
 
@@ -459,10 +459,10 @@ Wprowadzono także dodatkową poprawkę, która pozwalała w niektórych przypad
 \subsection{Analiza wyników pomiarów:}
 
 \subsubsection{Algorytm Prima - reprezentacja macierzowa:}
-Przyglądając się wartości parametru $c$ oraz jego względnemu odchyleniu standardowemu można zauważyć, że złożoność algorytmu Prima dla reprezentacji macierzowej nie jest do końca zgodna z teoretyczną złożonością $O(E \cdot \log V)$. Wynika to prawdopodobnie z opisywanych wcześniej decyzji dotyczącej rozmiaru kopca. W teoretycznej implementacji może on zwierać $V$ elementów, w mierzonej może przechowywać nawet do $E$ elementów. Można zaryzykować zatem stwierdzenie, że rzeczywista złożoność czasowa algorytmu Prima jest bliższa $O(E \cdot \log E)$ niż teoretycznie postulowanej $O(E \cdot \log V)$.\\
+Przyglądając się wartości parametru $c$ oraz jego względnemu odchyleniu standardowemu można zauważyć, że złożoność algorytmu Prima dla reprezentacji macierzowej nie jest do końca zgodna z teoretyczną złożonością $O(E \cdot \log V)$. Wynika to prawdopodobnie z opisanej wcześniej decyzji dotyczącej rozmiaru kopca. W teoretycznej implementacji może on zawierać $V$ elementów, w mierzonej może przechowywać nawet do $E$ elementów. Można zaryzykować zatem stwierdzenie, że rzeczywista złożoność czasowa algorytmu Prima jest bliższa $O(E \cdot \log E)$ niż teoretycznie postulowanej $O(E \cdot \log V)$.\\
 
 \subsubsection{Algorytm Kruskala - reprezentacja macierzowa:}
-W wypadku algorytmu Kruskala dla reprezentacji macierzowej rozbieżności z teoretyczną zależnością są znacznie bardziej zauważalne. Przyglądając się wykresowi porównującemu czas wykonywania się algorytmów wyznaczających MST, można zauważyć, że w przypadku algorytmu Kruskala wzrost wartości jest znacznie szybszy niż w wypadku algorytmu Prima. Jest on znacznie bardziej zbliżony do wzrostu funkcji klasy wielomianowej. Powodem takich odchyleń od zależności teoretycznej jest najprawdopodobniej użycie wewnątrz algorytmu metody zwracającej listę krawędzi grafu (rys. \ref{fig.kruskal-macierz-wyjasnienie-1}). Po przeanalizowaniu jej kodu (rys. \ref{fig.kruskal-macierz-wyjasnienie-2}) można zauważyć, że ma ona złożoność $O(V \cdot E)$, a dla grafu nieskierowanego $O(V^3)$.
+W wypadku algorytmu Kruskala dla reprezentacji macierzowej rozbieżności z teoretyczną zależnością są znacznie bardziej zauważalne. Przyglądając się wykresowi porównującemu czas wykonywania się algorytmów wyznaczających MST, można zauważyć, że w przypadku algorytmu Kruskala wzrost wartości jest znacznie szybszy niż w wypadku algorytmu Prima. Jest on znacznie bardziej zbliżony do wzrostu funkcji klasy wielomianowej. Powodem takich odchyleń od zależności teoretycznej jest najprawdopodobniej użycie wewnątrz algorytmu metody zwracającej listę krawędzi grafu (rys. \ref{fig.kruskal-macierz-wyjasnienie-1}). Po przeanalizowaniu jej kodu (rys. \ref{fig.kruskal-macierz-wyjasnienie-2}) można zauważyć, że ma ona złożoność $O(V \cdot E)$, czyli $O(V^3)$.
 \begin{figure}[H]
 	\centering
 	\caption{\centering Wydruk kodu przedstawiający użycie metody zwracającej listę krawędzi wewnątrz metody implementującej algorytm Kruskala dla grafu w reprezentacji macierzowej.}
@@ -481,7 +481,7 @@ W wypadku algorytmu Kruskala dla reprezentacji macierzowej rozbieżności z teor
 Dla obu rozważanych algorytmów działających na grafach w reprezentacji listowej można zauważyć kompletny brak zgodności z teorią. Także na wykresach widocznym jest fakt, że obie zmierzone zależności rosną w bardzo szybkim tempie. Ów wzrost jest ponadto raczej bliższy charakterystyce wielomianowej niż teoretycznej $(E \cdot \log V)$. Jest to spowodowane złożonością operacji pobierania elementu z listy, która wynosi $O(V)$.\\
 
 \noindent
-Ponadto w wypadku algorytmu Kruskala ponownie kosztownym okazało się wytworzenie samej listy krawędzi. Ta operacja także wymagała wielokrotnego dostępu do elementów listy.
+Ponadto w wypadku algorytmu Kruskala ponownie kosztownym okazało się wytworzenie samej listy krawędzi. Ta operacja także wymagała wielokrotnego dostępu do elementów list sąsiadów.
 
 %-------------------------------------------------------
 %	WYZNACZANIE MINIMALNEGO DRZEWA SPINAJĄCEGO
@@ -490,10 +490,10 @@ Ponadto w wypadku algorytmu Kruskala ponownie kosztownym okazało się wytworzen
 \subsection{Algorytm Dijkstry:}
 
 \subsubsection{Opis teoretyczny:}
-Algorytm Dijkstry jest algorytmem grafowym, pozwalającym na wyszukiwanie najkrótszych ścieżek z wybranego wierzchołka startowego do wszystkich innych wierzchołków. Zakłada przy tym, że graf, na którym wykonywany jest algorytm jest grafem spójny, o krawędziach skierowanych, których wagi są nieujemne.\\
+Algorytm Dijkstry jest algorytmem grafowym, pozwalającym na wyszukiwanie najkrótszych ścieżek z wybranego wierzchołka startowego do wszystkich innych wierzchołków. Zakłada przy tym, że graf, na którym wykonywany jest algorytm jest grafem spójnym, o krawędziach skierowanych, których wagi są nieujemne.\\
 
 \noindent
-Pierwszym krokiem algorytmu jest wybranie wierzchołka startowego. Następnie, w kolejnych iteracjach odwiedzani są coraz bardziej odległe od tegoż wierzchołki grafu. Kolejność odwiedzin definiowana jest przez łączną odległość od wierzchołka startowego. Pierwsze w kolejności są wierzchołki grafu o minimalnej odległości od punktu startu. Istotną częścią algorytmu Dijkstry jest proces tzw. relaksacji. Polega on na ciągłym wyszukiwaniu coraz to lepszych (krótszych) dróg do jeszcze nieodwiedzonych wierzchołków w każdej iteracji algorytmu.\\
+Pierwszym krokiem algorytmu jest wybranie wierzchołka startowego. Następnie, w kolejnych iteracjach odwiedzane są coraz bardziej odległe od tegoż wierzchołki grafu. Kolejność odwiedzin definiowana jest przez łączną odległość od wierzchołka startowego. Pierwsze w kolejności są wierzchołki grafu o minimalnej odległości od punktu startu. Istotną częścią algorytmu Dijkstry jest proces tzw. relaksacji. Polega on na ciągłym wyszukiwaniu coraz to lepszych (krótszych) dróg do jeszcze nieodwiedzonych wierzchołków w każdej iteracji algorytmu.\\
 
 \noindent
 Książkowa implementacja algorytmu zakłada użycie kolejki priorytetowej (kopca minimalnego), przechowującej informacje o ścieżkach prowadzących do poszczególnych wierzchołków. Pozwala to na szybki dostęp do tego wierzchołka grafu, którego odległość od punktu startowego będzie najmniejsza. Taki dostęp będzie mieć złożoność jednostkową $O(1)$. Dodawanie lub aktualizacja informacji o wierzchołku do wspomnianej kolejki będzie miała złożoność $O(\log V)$. W celu znalezienia najlepszych ścieżek (relaksacja) musimy rozważyć wszystkie krawędzie grafu, zatem wspominane operacje należy powtórzyć w najgorszym wypadku $E$ razy. Zatem ostateczna złożoność algorytmu wynosi $O (E \cdot \log V)$.
@@ -502,21 +502,21 @@ Książkowa implementacja algorytmu zakłada użycie kolejki priorytetowej (kopc
 Przy implementacji algorytmu Dijkstry wykorzystano kolejkę priorytetową. Była ona de facto zmodyfikowanym kopcem, stworzonym na potrzeby poprzedniego zadania projektowego. Zamiast liczb całkowitych ze znakiem przechowywał on strukturę o polach: indeks wierzchołka, sąsiad z przypisanej krawędzi, waga przypisanej krawędzi. W celu zoptymalizowania operacji dodawania i usuwania elementów pozbyto się przymusu każdorazowej relokacji kopca, występującego przy tychże działaniach. Dokonano tego poprzez zwirtualizowanie tychże operacji. Rzeczywisty rozmiar tablicy, na której bazował kopiec pozostawał stały. Zmniejszany bądź zwiększany był jedynie jej obszar uznawany w danym momencie za właściwy kopiec.\\
 
 \noindent
-W projekcie zrezygnowano także z tradycyjnej relaksacji elementów kolejki. Zamiast tego do kopca były za każdym razem dodawane nowe elementy (o ile opisywany przez nie wierzchołek nie był jeszcze odwiedzony). Jeżeli okazałyby się one wagowo korzystniejsze od poprzednich, to prawa rządzące kolejką sprawiały, że były one pobierane wcześniej od swoich gorszych pod tych względem "kopii" (elementów opisujących ten sam wierzchołek, ale z przypisaną inną wagą). Po przy pierwszym pobraniu z kolejki wierzchołek oznaczany był jako odwiedzony, co blokowało możliwość odwiedzenia go ponownie, przy pobraniu jego "kopii" z kopca. Zdecydowano się na takie rozwiązanie ze względu na fakt, że zwykła relaksacja wymagałaby wyszukania w kopcu elementu odpowiadającego danemu wierzchołkowi i następnie jego zmodyfikowanie. Wyszukiwanie elementu w takim wypadku ma złożoność klasy $O(V)$. Znacznie spowolniłoby to cały algorytm, dlatego zdecydowano się na pominięcie tegoż kroku.
+W projekcie zrezygnowano także z tradycyjnej relaksacji elementów kolejki. Zamiast tego do kopca były za każdym razem dodawane nowe elementy (o ile opisywany przez nie wierzchołek nie był jeszcze odwiedzony). Jeżeli okazałyby się one wagowo korzystniejsze od poprzednich, to prawa rządzące kolejką sprawiały, że były one pobierane wcześniej od swoich gorszych pod tych względem "kopii" (elementów opisujących ten sam wierzchołek, ale z przypisaną inną wagą). Po pierwszym pobraniu z kolejki wierzchołek oznaczany był jako odwiedzony, co blokowało możliwość odwiedzenia go ponownie, przy pobraniu jego "kopii" z kopca. Zdecydowano się na takie rozwiązanie ze względu na fakt, że zwykła relaksacja wymagałaby wyszukania w kopcu elementu odpowiadającego danemu wierzchołkowi i następnie jego modyfikację. Wyszukiwanie elementu w takim wypadku ma złożoność klasy $O(V)$. Znacznie spowolniłoby to cały algorytm, dlatego zdecydowano się na pominięcie tegoż kroku.
 
 \subsection{Algorytm Bellmana-Forda:}
 
 \subsubsection{Opis teoretyczny:}
-Algorytm Bellmana-Forda jest algorytmem grafowym, pozwalającym na wyszukiwanie najkrótszych ścieżek z wybranego wierzchołka startowego do wszystkich innych wierzchołków. Zakłada przy tym, że gra, na którym wykonywany jest algorytm jest grafem spójnym, o krawędziach skierowanych. W przeciwieństwie do algorytmu Dijkstry dopuszczalne są ujemne wagi krawędzi.\\
+Algorytm Bellmana-Forda jest algorytmem grafowym, pozwalającym na wyszukiwanie najkrótszych ścieżek z wybranego wierzchołka startowego do wszystkich innych wierzchołków. Zakłada przy tym, że graf, na którym wykonywany jest algorytm jest grafem spójnym, o krawędziach skierowanych. W przeciwieństwie do algorytmu Dijkstry dopuszczalne są ujemne wagi krawędzi.\\
 
 \noindent
-Pierwszym krokiem algorytmu jest wybranie wierzchołka startowego i ustalenia odległości innych wierzchołków od tegoż na nieskończoność. Samemu wierzchołkowi startowemu przypisuje się odległość równą zero. Następnie wykonuje się $|V|-1$ relaksacji. Odbywają się one poprzez przeszukanie listy krawędzi w poszukiwaniu jak coraz to krótszych ścieżek do każdego z wierzchołków. Po tym wykonywane jest sprawdzenie, czy graf zawiera cykl ujemny. Jeżeli w grafie taki wystąpi, to algorytm nie zwróci poprawnego wyniku.\\
+Pierwszym krokiem algorytmu jest wybranie wierzchołka startowego i ustalenie odległości innych wierzchołków od tegoż na nieskończoność. Samemu wierzchołkowi startowemu przypisuje się odległość równą zero. Następnie wykonuje się $|V|-1$ relaksacji. Odbywają się one poprzez przeszukanie listy krawędzi w poszukiwaniu coraz to krótszych ścieżek do każdego z wierzchołków. Po tym wykonywane jest sprawdzenie, czy graf zawiera cykl ujemny. Jeżeli w grafie taki wystąpi, to algorytm nie zwróci poprawnego wyniku.\\
 
 \noindent
 W implementacji zgodnej z teorią musimy przeiterować się $V-1$ razy przez $E$-elemntową listę krawędzi grafu. Dodatkowo w celu sprawdzenia wystąpienia cyklu ujemnego najczęściej wykonuje się dodatkową iterację przez listę krawędzi. W związku z tym złożoność tego algorytmu wynosi $O(E \cdot V)$, co dla grafu skierowanego oznacza de facto złożoność czasową $O(V^3)$.
 
 \subsubsection{Zastosowana implementacja:}
-Implementacja w projekcie była w dużym stopniu zgodna z tą teoretyczną. Wprowadzono do niej jedynie drobne poprawki, pozwalające na częściowe skrócenie czasu wykonywania się algorytmu. Pierwszą z nich jest użycie flagi logicznej informującej, czy w danej iteracji nastąpiła jakakolwiek relaksacja. Znalezienie się jej w stanie niskim, oznacza, że algorytm można zakończyć przedwcześnie (gdyż uzyskano już najlepsze możliwe ścieżki). Drugą zmianą jest wprowadzenie dodatkowej $V$-tej iteracji w głównej pętli algorytmu. Jej rozpoczęcie pozwalało na łatwe i przejrzyste uzyskanie informacji o istnieniu cyklu ujemnego w grafie (bo ścieżki nieustannie poprawiały). 
+Implementacja w projekcie była w dużym stopniu zgodna z tą teoretyczną. Wprowadzono do niej jedynie drobne poprawki, pozwalające na częściowe skrócenie czasu wykonywania się algorytmu. Pierwszą z nich jest użycie flagi logicznej informującej, czy w danej iteracji nastąpiła jakakolwiek relaksacja. Znalezienie się jej w stanie niskim, oznacza, że algorytm można zakończyć przedwcześnie (gdyż uzyskano już najlepsze możliwe ścieżki). Drugą zmianą jest wprowadzenie dodatkowej $V$-tej iteracji w głównej pętli algorytmu. Jej rozpoczęcie pozwalało na łatwe i przejrzyste uzyskanie informacji o istnieniu cyklu ujemnego w grafie (bo ścieżki nieustannie się poprawiały). 
 
 \subsection{Wyniki pomiarów:}
 
@@ -777,7 +777,7 @@ Implementacja w projekcie była w dużym stopniu zgodna z tą teoretyczną. Wpro
 \subsection{Analiza wyników pomiarów:}
 
 \subsubsection{Algorytm Bellmana-Forda:}
-W wypadku algorytmu Bellmana-Forda wyniki pomiarów wydają się być dosyć dobrze zbliżone do teoretycznej złożoności czasowej $O(V^3)$. Warto jednak zaznaczyć, że wypadku obu reprezentacji algorytm Bellmana-Forda okazał być się znacznie bardziej czasowo wymagający od algorytmu Dijkstry.
+W wypadku algorytmu Bellmana-Forda wyniki pomiarów wydają się być dosyć dobrze zbliżone do teoretycznej złożoności czasowej $O(V^3)$. Warto jednak zaznaczyć, że wypadku obu reprezentacji algorytm Bellmana-Forda okazał się być znacznie bardziej czasowo wymagający od algorytmu Dijkstry.
 
 \subsubsection{Algorytm Dijkstry:}
 Dla grafu w reprezentacji macierzowej uzyskane wyniki zdają się być wystarczająco dobrze zbliżone do teoretycznej złożoności czasowej $O(E \cdot \log V)$. \\
@@ -788,7 +788,7 @@ Co do reprezentacji listowej, to podobnie jak w wypadku algorytmów Prima oraz K
 %-------------------------------------------------------
 %	WNIOSKI
 \section{Wnioski:}
-Złożoność obliczeniowa dostępu do elementu listy, sprawia, że praktycznie wszystkie algorytmy grafowe dla reprezentacji listowej są znacznie mniej efektywne niż ich odpowiedniki dla reprezentacji macierzowej. W wypadku napisanego projektu większość operacji dostępu do elementów listy odbywało się w ramach iterowania się po jej wszystkich elementach. Stąd można wywnioskować implementacja obiektów-iterwatorów dla tychże list, podobnych do tych obecnych w standardowej bibliotece STL, sprawiłaby, że reprezentacja listowa stałaby się znacznie bardziej konkurencyjna względem tej macierzowej.\\
+Złożoność obliczeniowa dostępu do elementu listy, sprawia, że praktycznie wszystkie algorytmy grafowe dla reprezentacji listowej są znacznie mniej efektywne niż ich odpowiedniki dla reprezentacji macierzowej. W wypadku napisanego projektu większość operacji dostępu do elementów listy odbywało się w ramach iterowania się po jej wszystkich elementach. Stąd można wywnioskować że implementacja obiektów-iteratorów dla tychże list, podobnych do tych obecnych w standardowej bibliotece STL, sprawiłaby, że reprezentacja listowa stałaby się znacznie bardziej konkurencyjna względem tej macierzowej.\\
 
 \noindent
 Warto także zauważyć, że w wypadku znajdowania najkrótszej ścieżki użycie algorytmu Bellmana-Forda jest uzasadnione wyłącznie w momencie, gdy istnieje możliwość wystąpienia krawędzi o ujemnych wagach. Jeżeli takie wagi w grafie nie występują, to algorytm Dijkstry będzie praktycznie zawsze lepszym wyborem z perspektywy długości czasu wykonywania.\\

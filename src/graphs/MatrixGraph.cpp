@@ -260,8 +260,7 @@ PathfindingResult MatrixGraph::algorithmBellmanFord(unsigned start){
         // Jeżeli w iteracji |V|-1 poprawił się jakiś cykl i znajeźliśmy się w iteracji |V|-tej, to 
         // oznacza to istnienie cyklu ujemnego w grafie
         if(i == matrix->getDegree()){
-            DynamicArray<VertexData> empty_result;
-            return PathfindingResult(empty_result, start);
+            return PathfindingResult(bf_array, start, true);
         }
 
         // Sprawdzam kolejne krawędzie. Jeżeli do wierzchołek końcowy ma większą wagę niż suma wag wierzchołka końcowego i łączących

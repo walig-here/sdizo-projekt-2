@@ -59,8 +59,8 @@ vector<EdgeData> FileReader::readGraphData(string file, unsigned& vetricies, uns
     }
 
     // Z pierwszej linii wczytuję kolejno:
-    // - liczbę wierzchołków
     // - liczbę krawędzi
+    // - liczbę wierzchołków
     // - wierzchołek początkowy
     // - wierzchołek końcowy
     // Jeżeli linia nie zawiera tych danych, to uznajemy ją za niepoprawną
@@ -71,10 +71,10 @@ vector<EdgeData> FileReader::readGraphData(string file, unsigned& vetricies, uns
         return vector<EdgeData>();
     }
 
-    vetricies = line_integers[0];    
+    edges_amount = line_integers[0];
+    vetricies = line_integers[1];    
     begin = line_integers[2];
     end = line_integers[3];
-    edges_amount = line_integers[1];
 
     // Z kolejnych linii wczytujemy informacje na temat krawędzi:
     // - początek

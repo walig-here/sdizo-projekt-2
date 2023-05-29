@@ -75,6 +75,7 @@ class PathfindingResult{
     /* POLA */
     private: std::vector<Path> paths;       // zbiór ścieżek wyznaczonych z pomocą algorytmu
     private: unsigned start;                // wierzchołek startowy ścieżki
+    private: bool nagative_cycle;           // czy wynik zawiera ujemny cykl
 
     /* METODY */
 
@@ -84,8 +85,9 @@ class PathfindingResult{
      * 
      * @param verticies tablica zawierająca stan wierzchołków na koniec algorytmu 
      * @param start wierzchołek startowy
+     * @param nagative_cycle czy graf zawiera cykl ujemny
      */
-    public: PathfindingResult(DynamicArray<VertexData>& verticies, unsigned start);
+    public: PathfindingResult(DynamicArray<VertexData>& verticies, unsigned start, bool negative_cycle=false);
 
 
     /**
@@ -116,6 +118,12 @@ class PathfindingResult{
      * Wyświetla wynik aglorytmu Dijkstry lub Bellmana-Forda.
      */
     public: void print();
+
+    /**
+     * @brief 
+     * Zwraca prawdę, jeżeli w wyniku znajduje się ujemny cykl.
+     */
+    public: bool doCointainNegativeCycle() { return nagative_cycle; }
 
 };
 
